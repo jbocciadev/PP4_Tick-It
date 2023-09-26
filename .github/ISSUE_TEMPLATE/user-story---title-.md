@@ -3,11 +3,11 @@ name: 'User Story: <Title>'
 about: Issue template for Tick-It project
 title: "[FEATURE]"
 labels: ''
-assignees: ''
+assignees: jbocciadev
 
 ---
 
-As a **role** I can **action** so that **result**.
+_As a_ **role** _I can_ **action** _so that_ **result**.
 
 ---------------------------------------------------------
 ## Acceptance Criteria
