@@ -4,7 +4,7 @@ from .models import Ticket, Team, Profile
 
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'author', 'assigned_team')
+    list_display = ('id', 'title', 'author', 'assigned_team', 'assigned_member')
     search_fields = ('id', 'author')
 
 
