@@ -108,3 +108,13 @@ Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` f
 ---
 
 Happy coding!
+
+
+
+--------------------
+Extending user model:
+https://docs.djangoproject.com/en/dev/topics/auth/customizing/#extending-the-existing-user-model
+https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#proxy
+
+Django models FK on_delete:
+https://sentry.io/answers/django-on-delete/
