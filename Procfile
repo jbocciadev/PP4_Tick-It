@@ -1,1 +1,1 @@
-web: gunicorn tickit.wsgi
+web: gunicorn ticketapp.wsgi
