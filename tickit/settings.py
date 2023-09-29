@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+import dj_database_url
+
+
 if os.path.isfile("env.py"):
     import env
 
@@ -22,6 +25,7 @@ if os.environ["DEVELOPMENT"]:
     DEBUG = True
 else:
     DEBUG = False
+
 
 ALLOWED_HOSTS = ['']
 ALLOWED_HOSTS.append(os.environ["ALLOWED_HOSTS"])
@@ -74,11 +78,15 @@ WSGI_APPLICATION = 'tickit.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(os.environ["DATABASE_URL"])
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
