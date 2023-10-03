@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <ul>
+            {% for ticket in ticket_list %}
+                <li>Ticket {{ticket.id}}, Title: {{ticket.title}}</li>
+            {% endfor %}
+    </ul>
+
+{% endblock %}
