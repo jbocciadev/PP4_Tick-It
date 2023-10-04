@@ -1,9 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-    <ul>
-            {% for ticket in ticket_list %}
-                <li>Ticket {{ticket.id}}, Title: {{ticket.title}}</li>
-            {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for ticket in ticket_list %}
+                            <a href="#">
+                                <tr>
+                                    
+                                        <th scope="row">{{ ticket.id }} </th>
+                                        <td>{{ ticket.title }} </td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    
+                                </tr>  
+                            </a>                              
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
 
 {% endblock %}
