@@ -8,7 +8,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Title</th>
-                        <th scope="col">Last</th>
+                        <th scope="col">Author</th>
                         <th scope="col">Handle</th>
                     </tr>
                     </thead>
@@ -17,10 +17,10 @@
                             <a href="#">
                                 <tr>
                                     
-                                        <th scope="row">{{ ticket.id }} </th>
-                                        <td>{{ ticket.title }} </td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                    <th scope="row">{{ ticket.id }} </th>
+                                    <td>{{ ticket.title }} </td>
+                                    <td>{{ ticket.author.profile.user }}</td>
+                                    <td>@mdo</td>
                                     
                                 </tr>  
                             </a>                              
