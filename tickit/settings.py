@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'ticketapp',
     'tickit',
+    'bootstrap5',
     'django_bootstrap_icons',
 ]
 

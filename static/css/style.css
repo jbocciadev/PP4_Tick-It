@@ -6,7 +6,7 @@
 }
 
 body {
-    /* background-color: lightgray; */
+    background-color: lightgray;
     font-family: 'Rubik', sans-serif;
 }
 table {
@@ -34,8 +34,6 @@ th {
     text-align: center;
 }
 
-
-
 footer {
     position:fixed;
     background-color:lightgray;
@@ -52,6 +50,7 @@ footer {
     justify-content: space-evenly;
 }
 
+
 .footer_socials a {
     font-size: 3rem;
 }
@@ -63,15 +62,21 @@ footer i {
     display: flex;
     background-color: indigo;
     padding: 0;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 .footer_text {
     background-color: slategray;
     color: #fff;
     margin: 0;
 }
+.footer_container {
+    /* border-top: 1px solid slategray; */
+    padding: 0;
+}
 
 /* ### Customizing Bootstrap variables ### */
+
+
 .navbar {
     --bs-navbar-active-color: indigo;
 }
