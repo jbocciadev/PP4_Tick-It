@@ -26,7 +26,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 #     DEBUG = True
 # else:
 #     DEBUG = False
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['']
@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
     'ticketapp',
+    'tickit',
 ]
 
 SITE_ID = 1
@@ -71,7 +73,7 @@ ROOT_URLCONF = 'tickit.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
