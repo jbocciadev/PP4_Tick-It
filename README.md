@@ -118,3 +118,6 @@ https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-u
 
 Django models FK on_delete:
 https://sentry.io/answers/django-on-delete/
+
+Hover effects:
+Ian Lunn https://ianlunn.github.io/Hover/
