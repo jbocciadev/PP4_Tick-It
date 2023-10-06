@@ -1,6 +1,9 @@
 /* comment */
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
+* {
+    /* border: 1px solid red; */
+}
 
 body {
     /* background-color: lightgray; */
@@ -17,9 +20,6 @@ th {
     font-family: 'Rubik', sans-serif;
     font-size: xx-large;
     color: limegreen;
-    /* background: -webkit-linear-gradient(to right, yellow, black);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */
 }
 
 .navbar-brand {
@@ -34,6 +34,42 @@ th {
     text-align: center;
 }
 
+
+
+footer {
+    position:fixed;
+    background-color:lightgray;
+    width: 100%;
+    bottom: 0;
+}
+.footer_row {
+    margin: 0;
+    padding: 0;
+}
+.footer_socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.footer_socials a {
+    font-size: 3rem;
+}
+
+footer i {
+    color:#fff
+}
+.footer_brand {
+    display: flex;
+    background-color: indigo;
+    padding: 0;
+    border-radius: 10px;
+}
+.footer_text {
+    background-color: slategray;
+    color: #fff;
+    margin: 0;
+}
 
 /* ### Customizing Bootstrap variables ### */
 .navbar {
