@@ -5,35 +5,52 @@
     /* border: 1px solid red; */
 }
 
-body {
-    background-color: lightgray;
+body {    
     font-family: 'Rubik', sans-serif;
 }
-table {
-    background-color: #fff;    
-}
-th {
-    text-align: center;
-}
 
-.tickit_header {
-    font-family: 'Rubik', sans-serif;
-    font-size: xx-large;
-    color: limegreen;
-}
 
+/* Navbar styling */
 .navbar-brand {
     background-color: indigo;
     border-radius: 10px;
     padding:5px;
 }
-
+.tickit_header {
+    font-family: 'Rubik', sans-serif;
+    font-size: xx-large;
+    color: limegreen;
+}
 .nav-item {
     margin: 5px;
     font-size: large;
     text-align: center;
 }
+.nav-item:hover {
+    font-weight: bolder;
+ }
+/* End of Navbar styling */
 
+
+.main-section {
+    background-color: #fff;
+    padding-top: 1rem;
+}
+
+.list_container{
+    padding-top: 1rem;;
+}
+table {
+    background-color: #fff;    
+}
+
+.list_header{
+    text-align: center;
+    /* background-color: rgb(40, 40, 40);  */
+}
+
+
+/* Footer styling */
 footer {
     position:fixed;
     background-color:lightgray;
@@ -49,12 +66,9 @@ footer {
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-
-
 .footer_socials a {
     font-size: 3rem;
 }
-
 footer i {
     color:#fff
 }
@@ -73,13 +87,15 @@ footer i {
     /* border-top: 1px solid slategray; */
     padding: 0;
 }
+/* End of Footer styling */
+
 
 /* ### Customizing Bootstrap variables ### */
-
-
 .navbar {
     --bs-navbar-active-color: indigo;
+    --bs-tertiary-bg-rgb: 211,211,211;
 }
+
 
 /* ### Hover effect for navbar buttons ### */
 .hvr-sweep-to-top {
@@ -123,7 +139,3 @@ footer i {
     -webkit-transform: scaleY(1);
     transform: scaleY(1);
   }
-
-.nav-item:hover {
-   font-weight: bolder;
-}

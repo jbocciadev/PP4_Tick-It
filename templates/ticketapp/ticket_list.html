@@ -1,11 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container">
+
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+<ul class="nav nav-pills justify-content-around">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">New ticket</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Find ticket</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Link</a>
+    </li>
+  </ul>
+</div>
+</div>
+</div>
+
+    <div class="container-fluid list_container">
         <div class="row">
-            <div class="col-10">
+            <div class="col-10 offset-1">
                 <table class="table table-bordered table-hover">
                     <thead>
-                    <tr>
+                    <tr class="list_header">
                         <th scope="col">ID</th>
                         <th scope="col">Title</th>
                         <th scope="col">Author</th>
@@ -17,7 +36,7 @@
                             <a href="#">
                                 <tr>
                                     
-                                    <th scope="row">{{ ticket.id }} </th>
+                                    <th class="list_header" scope="row">{{ ticket.id }} </th>
                                     <td>{{ ticket.title }} </td>
                                     <td>{{ ticket.author.profile.user }}</td>
                                     <td>@mdo</td>
