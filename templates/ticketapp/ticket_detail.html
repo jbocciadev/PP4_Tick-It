@@ -1,5 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="container">
+    <div class="row">
+        <div class="col col-8 offset-2">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <span>Ticket #: {{ ticket.id }}</span>
+                        <span class="position-absolute end-0">{{ ticket.created_on }}</span>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ ticket.title }}</li>
+                    <li class="list-group-item">{{ ticket.content }}</li>
+                    <li class="list-group-item">A third item</li>
+                  </ul>
+                <div class="card-body">
+        
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
 
 {% endblock %}

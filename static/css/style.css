@@ -38,10 +38,12 @@ body {
 }
 
 .list_container{
-    padding-top: 1rem;;
+    padding-top: 1rem;
+
 }
+
 table {
-    background-color: #fff;    
+    background-color: #fff;
 }
 
 .list_header{
@@ -52,6 +54,12 @@ table {
 .nav-pills .nav-link{
     box-shadow: 0.25rem 0.25rem .5rem rgba(0, 0, 0, .5);
 }
+
+
+
+/* .ticket_date{
+    justify-sel
+} */
 
 /* Footer styling */
 footer {
