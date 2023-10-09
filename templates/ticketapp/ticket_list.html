@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load bootstrap_icons %}
 
 <div class="container">
     <div class="row">
@@ -9,7 +10,7 @@
       <a class="nav-link active" aria-current="page" href="#">New ticket</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="#">Find ticket</a>
+      <a class="nav-link active" href="#">{% bs_icon 'search' %} Find ticket</a>
     </li>
     <li class="nav-item">
       <a class="nav-link active" href="#">Link</a>

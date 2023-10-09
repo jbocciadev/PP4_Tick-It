@@ -121,3 +121,6 @@ https://sentry.io/answers/django-on-delete/
 
 Hover effects:
 Ian Lunn https://ianlunn.github.io/Hover/
+
+User authentication:
+https://docs.djangoproject.com/en/4.2/topics/auth/default/ Login required mixin
