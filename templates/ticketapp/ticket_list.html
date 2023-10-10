@@ -5,54 +5,51 @@
 <div class="container">
     <div class="row">
         <div class="col-10">
-<ul class="nav nav-pills justify-content-around">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">New ticket</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="#">{% bs_icon 'search' %} Find ticket</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" href="#">Link</a>
-    </li>
-  </ul>
-</div>
-</div>
+            <ul class="nav nav-pills justify-content-around">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">New ticket</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">{% bs_icon 'search' %} Find ticket</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Link</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
-    <div class="container-fluid list_container">
-        <div class="row">
-            <div class="col-10 offset-1">
-                <div class="card"><div class="card-body">
-                <table class="table table-bordered table-hover">
-                    <thead class="table-info">
-                    <tr class="list_header">
-                        <th scope="col">ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Author</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for ticket in ticket_list %}
-                            <a href="#">
-                                <tr>
-                                    
-                                    <th class="list_header" scope="row">{{ ticket.id }} </th>
-                                    <td>{{ ticket.title }} </td>
-                                    <td>{{ ticket.author.profile.user }}</td>
-                                    <td>@mdo</td>
-                                    
-                                </tr>  
-                            </a>                              
+<div class="container-fluid list_container">
+    <div class="row">
+        <div class="col-10 offset-1">
+            <div class="card"><div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead class="table-info">
+                <tr class="list_header">
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
 
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            </div>
+                    {% for ticket in ticket_list %}
+                            <tr class="ticket-row" data-ticket="{{ ticket.id }}">                                
+                                <th class="list_header" scope="row">{{ ticket.id }} </th>
+                                <td>{{ ticket.title }}</td>
+                                <td>{{ ticket.author.profile.user }}</td>
+                                <td>@mdo</td>
+                            </tr>  
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
         </div>
         </div>
+    </div>
+    </div>
 </div>
 
 {% endblock %}
