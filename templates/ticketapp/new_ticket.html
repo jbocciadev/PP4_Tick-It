@@ -1,5 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <div class="row"><div class="col-8 offset-2">
+        <h3>Log a new ticket</h3></div>
+        <div class="col-8 offset-2 card">
+            
+            <form method="post" style="margin-top: 1.3em;">
+                {{ ticket_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-log-ticket btn-lg">Submit</button>
+            </form>
+</div>
+</div>
+</div>
 
 
 {% endblock %}

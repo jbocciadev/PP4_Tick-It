@@ -56,7 +56,14 @@ table {
 }
 
 
-
+.btn-log-ticket {
+    background-color: indigo;
+    color: limegreen;
+}
+.btn-log-ticket:hover {
+    color: indigo;
+    background-color:limegreen;
+}
 
 /* Footer styling */
 footer {

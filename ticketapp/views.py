@@ -3,9 +3,8 @@ from django.views import generic, View
 from django.contrib.auth.models import User
 from .models import Ticket, Profile, Team, Ticket
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import TicketForm
 
-
-# class TicketList(generic.ListView):
 
 def landing_page(request):
     if request.user.is_authenticated:
@@ -22,10 +21,10 @@ class TicketList(LoginRequiredMixin, generic.ListView):
     paginate_by = 10
 
 
-class TicketDetail(View):
+class TicketDetail(LoginRequiredMixin, View):
 
     def get(self, request, ticket_id, *args, **kwargs):
-        queryset = Ticket.objects.filter(id = ticket_id)
+        queryset = Ticket.objects.filter(id=ticket_id)
         ticket = get_object_or_404(queryset)
 
         return render(
@@ -35,4 +34,17 @@ class TicketDetail(View):
                 'ticket': ticket,
             },
         )
+
+
+class NewTicket(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+
+        return render(
+            request,
+            "ticketapp/new_ticket.html",
+            {
+                'ticket_form': TicketForm()
+            },
+        )
+
 

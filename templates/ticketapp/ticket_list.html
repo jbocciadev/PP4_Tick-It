@@ -30,16 +30,18 @@
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Created</th>
                 </tr>
                 </thead>
                 <tbody>
 
                     {% for ticket in ticket_list %}
                             <tr class="ticket-row" data-ticket="{{ ticket.id }}">                                
-                                <th class="list_header" scope="row">{{ ticket.id }} </th>
+                                <th class="list_header" scope="row"># {{ ticket.id }} </th>
                                 <td>{{ ticket.title }}</td>
                                 <td>{{ ticket.author.profile.user }}</td>
+                                <td>{{ ticket.created_on | date }}</td>
                                 <td>@mdo</td>
                             </tr>  
                     {% endfor %}
