@@ -47,4 +47,14 @@ class NewTicket(LoginRequiredMixin, View):
             },
         )
 
+    def post(self, request, *args, **kwargs):
+        ticket_form = TicketForm(data=request.POST)
 
+        if ticket_form.is_valid():
+            ticket_form.instance.author = request.user
+            ticket = ticket_form.save(commit=False)
+            ticket.save()
+        else:
+            ticket_form = TicketForm
+        
+        return redirect('/ticket_list')

@@ -64,7 +64,8 @@ class Ticket(models.Model):
     assigned_team = models.ForeignKey(
         Team,
         related_name='team_assigned_tickets',
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        default=1
     )
     assigned_member = models.ForeignKey(
         User,
