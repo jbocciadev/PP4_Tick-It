@@ -15,17 +15,16 @@ def landing_page(request):
 
 
 class TicketList(LoginRequiredMixin, generic.ListView):
+    # Returns list of tickets.
+    # If user is staff, only return open tickets. If user is customer,
+    # only return user-created tickets
     redirect_field_name = '/accounts/login'
     model = Ticket
 
-    def get_user_role(self, loggedUser):
-        fullLoggedUser = User.objects.get(pk=loggedUser.id)
-        return fullLoggedUser.profile.role
-
     def get_queryset(self):
         loggedUser = self.request.user
-        print(loggedUser)
-        if self.get_user_role(loggedUser) == 0:
+
+        if loggedUser.profile.role == 0:
             return Ticket.objects.filter(Q(author=loggedUser)).prefetch_related('author').order_by('-created_on')
         else:
             return Ticket.objects.filter(~Q(status=3)).prefetch_related('author').order_by('-created_on')
@@ -39,7 +38,6 @@ class TicketDetail(LoginRequiredMixin, View):
     def get(self, request, ticket_id, *args, **kwargs):
         # renders the individual ticket only if the user created it or if the user is not a customer
         loggedUser = request.user
-        print(loggedUser)
         ticket = get_object_or_404(Ticket, id=ticket_id)
 
         if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
