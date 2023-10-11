@@ -37,16 +37,24 @@ class TicketList(LoginRequiredMixin, generic.ListView):
 class TicketDetail(LoginRequiredMixin, View):
 
     def get(self, request, ticket_id, *args, **kwargs):
-        queryset = Ticket.objects.filter(id=ticket_id)
-        ticket = get_object_or_404(queryset)
+        # renders the individual ticket only if the user created it or if the user is not a customer
+        loggedUser = request.user
+        print(loggedUser)
+        ticket = get_object_or_404(Ticket, id=ticket_id)
 
-        return render(
-            request,
-            "ticketapp/ticket_detail.html",
-            {
-                'ticket': ticket,
-            },
-        )
+        if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
+            return render(
+                request,
+                "ticketapp/ticket_detail.html",
+                {
+                    'ticket': ticket,
+                },
+            )
+        else:
+            return render(
+                request,
+                'ticketapp/no_access.html'
+            )
 
 
 class NewTicket(LoginRequiredMixin, View):
@@ -69,5 +77,5 @@ class NewTicket(LoginRequiredMixin, View):
             ticket.save()
         else:
             ticket_form = TicketForm
-        
+
         return redirect('/ticket_list')
