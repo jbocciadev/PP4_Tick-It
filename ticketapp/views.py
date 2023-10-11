@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.views import generic, View
 from django.contrib.auth.models import User
 from .models import Ticket, Profile, Team, Ticket
+from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import TicketForm
 
@@ -16,9 +17,21 @@ def landing_page(request):
 class TicketList(LoginRequiredMixin, generic.ListView):
     redirect_field_name = '/accounts/login'
     model = Ticket
-    queryset = Ticket.objects.prefetch_related('author')
+
+    def get_user_role(self, loggedUser):
+        fullLoggedUser = User.objects.get(pk=loggedUser.id)
+        return fullLoggedUser.profile.role
+
+    def get_queryset(self):
+        loggedUser = self.request.user
+        print(loggedUser)
+        if self.get_user_role(loggedUser) == 0:
+            return Ticket.objects.filter(Q(author=loggedUser)).prefetch_related('author').order_by('-created_on')
+        else:
+            return Ticket.objects.filter(~Q(status=3)).prefetch_related('author').order_by('-created_on')
+
     template_name = 'ticket_list.html'
-    paginate_by = 10
+    paginate_by = 15
 
 
 class TicketDetail(LoginRequiredMixin, View):

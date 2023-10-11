@@ -1,13 +1,14 @@
 {% extends "base.html" %}
-{% block content %}
 {% load bootstrap_icons %}
+{% block content %}
+
 
 <div class="container">
     <div class="row">
         <div class="col-10">
             <ul class="nav nav-pills justify-content-around">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">New ticket</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'NewTicket'%}">New ticket</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="#">{% bs_icon 'search' %} Find ticket</a>

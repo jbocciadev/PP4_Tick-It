@@ -26,7 +26,7 @@ ROLE = (
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    teams = models.ManyToManyField(Team)
+    teams = models.ManyToManyField(Team, blank=True)
     name = models.CharField(max_length=50, null=False, blank=False)
     surname = models.CharField(max_length=50, null=False, blank=False)
     role = models.IntegerField(choices=ROLE, default=0)
