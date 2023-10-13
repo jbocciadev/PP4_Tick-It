@@ -41,7 +41,24 @@ class TicketDetail(LoginRequiredMixin, View):
         ticket = get_object_or_404(Ticket, id=ticket_id)
 
         if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
+            # Creating empty dict to store values
+            staff_listing = {}
             teams = Team.objects.all()
+            users = User.objects.all()
+
+            #  Iterating through teams to create keys for dict
+            for team in teams:
+                staff_listing[team.name] = []
+                # Iterating through users to see if they are in team and add to listing
+                for user in users:
+                    user_teams = []
+                    for i in user.profile.teams.values():
+                        user_teams.append(i['name'])
+                    if str(team) in user_teams:
+
+                        staff_listing[team.name].append(user)
+            print(staff_listing)
+
             status_options = {
                 0: 'Open',
                 1: 'Assigned',
@@ -56,6 +73,7 @@ class TicketDetail(LoginRequiredMixin, View):
                     'user': loggedUser,
                     'teams': teams,
                     'status_options': status_options,
+                    'staff_listing': staff_listing
                 },
             )
         else:
