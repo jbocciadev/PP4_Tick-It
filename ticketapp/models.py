@@ -60,7 +60,6 @@ class Ticket(models.Model):
         on_delete=models.SET('user_deleted')
     )
     created_on = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=STATUS, default=0)
     assigned_team = models.ForeignKey(
         Team,
         related_name='team_assigned_tickets',
@@ -74,3 +73,5 @@ class Ticket(models.Model):
         null=True,
         blank=True
     )
+    status = models.IntegerField(choices=STATUS, default=0)
+    closed_on = models.DateTimeField(blank=True, null=True)

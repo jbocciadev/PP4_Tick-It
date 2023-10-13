@@ -31,8 +31,9 @@
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Created</th>
-                    <th scope="col">Created</th>
+                    
                 </tr>
                 </thead>
                 <tbody>
@@ -42,8 +43,9 @@
                                 <th class="list_header" scope="row"># {{ ticket.id }} </th>
                                 <td>{{ ticket.title }}</td>
                                 <td>{{ ticket.author.profile.user }}</td>
+                                <td>{{ ticket.get_status_display }}</td>
                                 <td>{{ ticket.created_on | date }}</td>
-                                <td>@mdo</td>
+                                
                             </tr>  
                     {% endfor %}
                     

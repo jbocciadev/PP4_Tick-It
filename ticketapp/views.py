@@ -41,11 +41,21 @@ class TicketDetail(LoginRequiredMixin, View):
         ticket = get_object_or_404(Ticket, id=ticket_id)
 
         if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
+            teams = Team.objects.all()
+            status_options = {
+                0: 'Open',
+                1: 'Assigned',
+                2: 'Parked',
+                3: 'Closed',
+            }
             return render(
                 request,
                 "ticketapp/ticket_detail.html",
                 {
                     'ticket': ticket,
+                    'user': loggedUser,
+                    'teams': teams,
+                    'status_options': status_options,
                 },
             )
         else:
