@@ -33,6 +33,7 @@
                     <th scope="col">Author</th>
                     <th scope="col">Status</th>
                     <th scope="col">Team</th>
+                    <th scope="col">Member</th>
                     <th scope="col">Created</th>
                     
                 </tr>
@@ -46,6 +47,11 @@
                                 <td>{{ ticket.author.profile.user }}</td>
                                 <td>{{ ticket.get_status_display }}</td>
                                 <td>{{ ticket.assigned_team }}</td>
+                                {% if ticket.assigned_member == None %}
+                                    <td></td>
+                                {% else %}
+                                    <td>{{ ticket.assigned_member }}</td>
+                                {% endif %}
                                 <td>{{ ticket.created_on | date }}</td>
                                 
                             </tr>  

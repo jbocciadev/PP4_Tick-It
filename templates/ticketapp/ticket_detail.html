@@ -69,7 +69,11 @@
                                     <option value="{{member}}">{{member}}</option>
                                     {% endfor %}
                                 {% else %}
-                                    <option disabled value></option>
+                                    {% if ticket.assigned_member == None %}
+                                        <option disabled value selected></option>
+                                    {% else %}
+                                        <option disabled value></option>
+                                    {% endif %}
                                     {% for member in members %}
                                     {% if ticket.assigned_member == member and ticket.assigned_team == team %}
                                     <option value="{{ticket.assigned_member}}" selected>{{ticket.assigned_member}}</option>
