@@ -7,3 +7,9 @@ class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = ('title', 'content',)
+
+
+class StatusForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ('status',)

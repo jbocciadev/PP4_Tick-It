@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import Ticket, Profile, Team, Ticket
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import TicketForm
+from .forms import TicketForm, StatusForm
 
 
 def landing_page(request):
@@ -39,7 +39,7 @@ class TicketDetail(LoginRequiredMixin, View):
         # renders the individual ticket only if the user created it or if the user is not a customer
         loggedUser = request.user
         ticket = get_object_or_404(Ticket, id=ticket_id)
-        
+
 
         if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
             # Creating empty dict to store values
@@ -58,8 +58,6 @@ class TicketDetail(LoginRequiredMixin, View):
                     if str(team) in user_teams:
 
                         staff_listing[team].append(user)
-            print(staff_listing)
-            print(ticket.assigned_team)
 
             status_options = {
                 0: 'Open',
@@ -83,6 +81,20 @@ class TicketDetail(LoginRequiredMixin, View):
                 request,
                 'ticketapp/no_access.html'
             )
+
+
+class UpdateStatus(LoginRequiredMixin, View):
+    def post(self, request, ticket_id, *args, **kwargs):
+        form = StatusForm(request.POST)
+    
+        if form.is_valid():
+            ticket = get_object_or_404(Ticket, id=ticket_id)
+            ticket.status = form['status'].value()
+            ticket.save()
+
+        return redirect('TicketDetail', ticket_id=ticket_id)
+
+
 
 
 class NewTicket(LoginRequiredMixin, View):

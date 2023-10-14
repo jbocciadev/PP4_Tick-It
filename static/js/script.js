@@ -16,4 +16,5 @@ document.addEventListener("DOMContentLoaded", function(){
     statusOption.addEventListener("change", function(){
         statusSaveBtn.classList.remove("visually-hidden");
     });
+
 })
