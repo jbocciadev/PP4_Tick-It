@@ -10,4 +10,10 @@ document.addEventListener("DOMContentLoaded", function(){
             window.open(newURL, name="_self");
         })
     }
+
+    let statusOption = document.getElementById("status-option");
+    let statusSaveBtn = document.getElementById("status-save-btn");
+    statusOption.addEventListener("change", function(){
+        statusSaveBtn.classList.remove("visually-hidden");
+    });
 })
