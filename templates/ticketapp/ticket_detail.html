@@ -36,13 +36,14 @@
                                     {% endif %}
                                 {% endfor %}
                             </select>
-                            <button type="submit" class="btn btn-success btn-status-change visually-hidden" id="status-save-btn">Save</button>
+                            <button type="submit" class="btn btn-success btn-ticket-change visually-hidden" id="status-save-btn">Save</button>
                         </form>
                         </li>
 
                         <li class="list-group-item">
+                            <form action="{% url 'UpdateAssignment' ticket_id=ticket.id %}" method="post">{% csrf_token %}
                             <label for="team" class="form-label">Assigned team: </label>
-                            <select name="status" id="team" class="form-select">
+                            <select name="assigned_team" id="team" class="form-select">
                                 {% for team in teams %}
                                     {% if ticket.assigned_team == team %}
                                         <option value="{{team}}" selected>{{team}}</option>
@@ -50,26 +51,39 @@
                                         <option value="{{team}}">{{team}}</option>
                                     {% endif %}
                                 {% endfor %}
-                                
+                                                                
                             </select>
-                        </li>
-
-                        {% for team, members in staff_listing.items %}
-                        <!-- Inserting 1 select per team with possible staff members -->
-                            {% if team != ticket.assigned_team %}
-                            <li class="list-group-item visually-hidden" data-team="{{team}}">
-                            {% else %}
-                            <li class="list-group-item" data-team="{{team}}">
-                            {% endif %}
                             <label for="member" class="form-label">Assigned member:</label>
-                            <select name="member" id="member" class="form-select">
-                            {% for i in members %}
-                                <option value="{{i}}">{{i}}</option>
-                            {% endfor %}
-                            </select>
-                        </li>
 
-                        {% endfor %}
+
+                            <!-- Inserting 1 select per team with possible staff members -->
+                            {% for team, members in staff_listing.items %}
+                            {% if ticket.assigned_team != team %}
+                            <select name="member" id="member" class="form-select visually-hidden" disabled>
+                            {% else %}
+                            <select name="member" id="member" class="form-select">
+                            {% endif %}
+                                {% if ticket.assigned_team != team %}
+                                    <option disabled value selected></option>
+                                    {% for member in members %}
+                                    <option value="{{member}}">{{member}}</option>
+                                    {% endfor %}
+                                {% else %}
+                                    <option disabled value></option>
+                                    {% for member in members %}
+                                    {% if ticket.assigned_member == member and ticket.assigned_team == team %}
+                                    <option value="{{ticket.assigned_member}}" selected>{{ticket.assigned_member}}</option>
+                                    {% else %}
+                                    <option value="{{member}}">{{member}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                            {% endfor %}
+                            
+                            <button type="submit" class="btn btn-success btn-ticket-change visually-hidden" id="assignment-save-btn">Save</button>
+                            </form>
+                        </li>
 
                     {% endif %}
 

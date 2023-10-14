@@ -13,3 +13,9 @@ class StatusForm(forms.ModelForm):
     class Meta:
         model = Ticket
         fields = ('status',)
+
+
+class AssignmentForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ('assigned_team', 'assigned_member',)

@@ -86,7 +86,7 @@ class TicketDetail(LoginRequiredMixin, View):
 class UpdateStatus(LoginRequiredMixin, View):
     def post(self, request, ticket_id, *args, **kwargs):
         form = StatusForm(request.POST)
-    
+
         if form.is_valid():
             ticket = get_object_or_404(Ticket, id=ticket_id)
             ticket.status = form['status'].value()
@@ -95,7 +95,16 @@ class UpdateStatus(LoginRequiredMixin, View):
         return redirect('TicketDetail', ticket_id=ticket_id)
 
 
+class UpdateAssignment(LoginRequiredMixin, View):
+    def post(self, request, ticket_id, *args, **kwargs):
+        form = AssignmentForm(request.POST)
 
+        if form.is_valid():
+            ticket = get_object_or_404(Ticket, id=ticket_id)
+            ticket.status = form['status'].value()
+            ticket.save()
+
+        return redirect('TicketDetail', ticket_id=ticket_id)
 
 class NewTicket(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
