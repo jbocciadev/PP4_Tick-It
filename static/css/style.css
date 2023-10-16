@@ -31,6 +31,9 @@ body {
  }
 /* End of Navbar styling */
 
+.background {
+    background-image: url("{% static 'media/landing-background.webp' %}");
+}
 
 .main-section {
     background-color: #fff;

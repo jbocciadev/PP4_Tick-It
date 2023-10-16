@@ -9,13 +9,18 @@ class TicketForm(forms.ModelForm):
         fields = ('title', 'content',)
 
 
-class StatusForm(forms.ModelForm):
-    class Meta:
-        model = Ticket
-        fields = ('status',)
+# class StatusForm(forms.ModelForm):
+#     class Meta:
+#         model = Ticket
+#         fields = ('status',)
 
 
-class AssignmentForm(forms.ModelForm):
+# class AssignmentForm(forms.ModelForm):
+#     class Meta:
+#         model = Ticket
+#         fields = ('assigned_team', 'assigned_member',)
+
+class TicketUpdateForm(forms.ModelForm):
     class Meta:
         model = Ticket
-        fields = ('assigned_team', 'assigned_member',)
+        fields = ('status', 'assigned_team', 'assigned_member',)

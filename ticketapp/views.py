@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from .models import Ticket, Profile, Team, Ticket
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import TicketForm, StatusForm
+from .forms import  TicketUpdateForm
 
+# TicketForm, StatusForm,
 
 def landing_page(request):
     if request.user.is_authenticated:
@@ -40,7 +41,6 @@ class TicketDetail(LoginRequiredMixin, View):
         loggedUser = request.user
         ticket = get_object_or_404(Ticket, id=ticket_id)
 
-
         if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
             # Creating empty dict to store values
             staff_listing = {}
@@ -57,6 +57,7 @@ class TicketDetail(LoginRequiredMixin, View):
                         user_teams.append(i['name'])
                     if str(team) in user_teams:
                         staff_listing[team].append(user)
+            print(staff_listing)
 
             status_options = {
                 0: 'Open',
@@ -80,29 +81,48 @@ class TicketDetail(LoginRequiredMixin, View):
                 'ticketapp/no_access.html'
             )
 
-
-class UpdateStatus(LoginRequiredMixin, View):
     def post(self, request, ticket_id, *args, **kwargs):
-        form = StatusForm(request.POST)
+        form = TicketUpdateForm(request.POST)
+        print("posted")
 
         if form.is_valid():
+            print("valid form")
             ticket = get_object_or_404(Ticket, id=ticket_id)
             ticket.status = form['status'].value()
+            ticket.assigned_team = form['team'].value()
+            ticket.assigned_member = form['member'].value()
             ticket.save()
+        else:
+            print("invalid form")
+            print(form.errors.as_data())
+            print(f"from form: ${form['assigned_team']}")
+            # print(form)
 
-        return redirect('TicketDetail', ticket_id=ticket_id)
+        return redirect('TicketDetail', ticket_id=ticket_id)    
 
 
-class UpdateAssignment(LoginRequiredMixin, View):
-    def post(self, request, ticket_id, *args, **kwargs):
-        form = AssignmentForm(request.POST)
+# class UpdateStatus(LoginRequiredMixin, View):
+#     def post(self, request, ticket_id, *args, **kwargs):
+#         form = StatusForm(request.POST)
 
-        if form.is_valid():
-            ticket = get_object_or_404(Ticket, id=ticket_id)
-            ticket.status = form['status'].value()
-            ticket.save()
+#         if form.is_valid():
+#             ticket = get_object_or_404(Ticket, id=ticket_id)
+#             ticket.status = form['status'].value()
+#             ticket.save()
 
-        return redirect('TicketDetail', ticket_id=ticket_id)
+#         return redirect('TicketDetail', ticket_id=ticket_id)
+
+
+# class UpdateAssignment(LoginRequiredMixin, View):
+#     def post(self, request, ticket_id, *args, **kwargs):
+#         form = AssignmentForm(request.POST)
+
+#         if form.is_valid():
+#             ticket = get_object_or_404(Ticket, id=ticket_id)
+#             ticket.status = form['status'].value()
+#             ticket.save()
+
+#         return redirect('TicketDetail', ticket_id=ticket_id)
 
 class NewTicket(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
