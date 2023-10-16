@@ -43,8 +43,8 @@
                         <li class="list-group-item">
                             <form action="{% url 'UpdateAssignment' ticket_id=ticket.id %}" method="post">{% csrf_token %}
                             <label for="team" class="form-label">Assigned team: </label>
-                            <select name="assigned_team" id="team" class="form-select">
-                                {% for team in teams %}
+                            <select name="assigned_team" id="ticket_detail_team" class="form-select">
+                                {% for team, members in staff_listing.items %}
                                     {% if ticket.assigned_team == team %}
                                         <option value="{{team}}" selected>{{team}}</option>
                                     {% else %}
@@ -53,15 +53,14 @@
                                 {% endfor %}
                                                                 
                             </select>
+
                             <label for="member" class="form-label">Assigned member:</label>
-
-
                             <!-- Inserting 1 select per team with possible staff members -->
                             {% for team, members in staff_listing.items %}
                             {% if ticket.assigned_team != team %}
-                            <select name="member" id="member" class="form-select visually-hidden" disabled>
+                            <select name="member" id="member" class="form-select visually-hidden {{ team | slugify }}" disabled>
                             {% else %}
-                            <select name="member" id="member" class="form-select">
+                            <select name="member" id="member" class="form-select {{ team | slugify }}">
                             {% endif %}
                                 {% if ticket.assigned_team != team %}
                                     <option disabled value selected></option>

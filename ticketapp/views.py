@@ -56,7 +56,6 @@ class TicketDetail(LoginRequiredMixin, View):
                     for i in user.profile.teams.values():
                         user_teams.append(i['name'])
                     if str(team) in user_teams:
-
                         staff_listing[team].append(user)
 
             status_options = {
@@ -71,7 +70,6 @@ class TicketDetail(LoginRequiredMixin, View):
                 {
                     'ticket': ticket,
                     'user': loggedUser,
-                    'teams': teams,
                     'status_options': status_options,
                     'staff_listing': staff_listing
                 },
