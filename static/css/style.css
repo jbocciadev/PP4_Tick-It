@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
 * {
-    /* border: 1px solid red; */
+    border: 1px solid red;
+    margin: 0;
+    padding: 0;
 }
 
 body {    
@@ -32,7 +34,13 @@ body {
 /* End of Navbar styling */
 
 .background {
-    background-image: url("{% static 'media/landing-background.webp' %}");
+    background-image: url(https://res.cloudinary.com/dj6z5zmmy/image/upload/v1697477589/static/media/landing-background.9232705898d4.webp);
+    /* max-width: 100%;*/
+    height: 100%;
+    /* object-fit: cover; */
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    overflow: hidden;
 }
 
 .main-section {
@@ -76,7 +84,7 @@ table {
 
 /* Footer styling */
 footer {
-    position:fixed;
+    /* position:fixed; */
     background-color:lightgray;
     width: 100%;
     bottom: 0;
@@ -106,6 +114,7 @@ footer i {
     background-color: slategray;
     color: #fff;
     margin: 0;
+    padding: 0;
 }
 .footer_container {
     /* border-top: 1px solid slategray; */
@@ -119,6 +128,9 @@ footer i {
     --bs-navbar-active-color: indigo;
     --bs-tertiary-bg-rgb: 211,211,211;
 }
+/* .col-12{
+    padding:0;
+} */
 
 
 /* ### Hover effect for navbar buttons ### */

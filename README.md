@@ -124,3 +124,12 @@ Ian Lunn https://ianlunn.github.io/Hover/
 
 User authentication:
 https://docs.djangoproject.com/en/4.2/topics/auth/default/ Login required mixin
+
+Django Forms
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Forms
+
+Querying with list of values:
+https://stackoverflow.com/questions/9304908/how-can-i-filter-a-django-query-with-a-list-of-values
+
+Form querysets:
+https://docs.djangoproject.com/en/4.2/ref/models/querysets/ (see Q https://docs.djangoproject.com/en/4.2/ref/models/querysets/#django.db.models.Q and select_related)

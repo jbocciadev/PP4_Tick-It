@@ -4,9 +4,8 @@ from django.contrib.auth.models import User
 from .models import Ticket, Profile, Team, Ticket
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import  TicketUpdateForm
+from .forms import TicketUpdateForm
 
-# TicketForm, StatusForm,
 
 def landing_page(request):
     if request.user.is_authenticated:
@@ -65,6 +64,9 @@ class TicketDetail(LoginRequiredMixin, View):
                 2: 'Parked',
                 3: 'Closed',
             }
+
+            form = TicketUpdateForm
+
             return render(
                 request,
                 "ticketapp/ticket_detail.html",
@@ -72,7 +74,8 @@ class TicketDetail(LoginRequiredMixin, View):
                     'ticket': ticket,
                     'user': loggedUser,
                     'status_options': status_options,
-                    'staff_listing': staff_listing
+                    'staff_listing': staff_listing,
+                    'form': form,
                 },
             )
         else:
@@ -98,7 +101,7 @@ class TicketDetail(LoginRequiredMixin, View):
             print(f"from form: ${form['assigned_team']}")
             # print(form)
 
-        return redirect('TicketDetail', ticket_id=ticket_id)    
+        return redirect('TicketDetail', ticket_id=ticket_id)
 
 
 # class UpdateStatus(LoginRequiredMixin, View):

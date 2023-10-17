@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+
 {% block content %}
 
 <div class="container">
+    
     <div class="row">
         <div class="col col-8 offset-2">
             <div class="card">
@@ -26,9 +28,13 @@
                         
                     <form action="{% url 'TicketDetail' ticket_id=ticket.id %}" method="post">
                         {% csrf_token %}
+
+
                         <li class="list-group-item">
                             <label for="status" class="form-label">Status: </label>
+                            {{ form.status }}
                             <select name="status" id="status-option" class="form-select">
+                                
                                 {% for key, value in status_options.items %}
                                     {% if ticket.status == key %}
                                         <option value="{{key}}" selected>{{value}}</option>
@@ -82,6 +88,9 @@
                             </select>
                             {% endfor %}
                         </li>
+
+
+                        {{ form }}
                         <li class="list-group-item visually-hidden">
                             <button type="submit" class="btn btn-success btn-ticket-change visually-hidden" id="saveBtn" disabled>Save</button>
                         </li>
