@@ -18,7 +18,7 @@ staff = Profile.objects.filter(~Q(role=0)).values('user')
 staff_list = []
 for i in staff :
     staff_list.append(i["user"])
-print(staff_list)
+
 
 class TicketUpdateForm(forms.ModelForm):
     status = forms.ChoiceField(required=True, choices=[
@@ -27,9 +27,11 @@ class TicketUpdateForm(forms.ModelForm):
         (2, "Parked"),
         (3, "Closed")])
     status.widget.attrs.update({'class': 'form-select'})
+
     assigned_team = forms.ModelChoiceField(queryset=Team.objects.all())
     assigned_team.widget.attrs.update({'class': 'form-select'})
-    assigned_member = forms.ModelChoiceField(queryset=User.objects.filter(pk__in=staff_list))
+
+    assigned_member = forms.ModelChoiceField(queryset=User.objects.filter(pk__in=staff_list), required=False)
     assigned_member.widget.attrs.update({'class': 'form-select'})
 
     class Meta:

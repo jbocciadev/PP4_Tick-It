@@ -133,3 +133,6 @@ https://stackoverflow.com/questions/9304908/how-can-i-filter-a-django-query-with
 
 Form querysets:
 https://docs.djangoproject.com/en/4.2/ref/models/querysets/ (see Q https://docs.djangoproject.com/en/4.2/ref/models/querysets/#django.db.models.Q and select_related)
+
+Prepopulating forms with current values:
+https://studygyaan.com/django/how-to-give-initial-value-to-model-forms?utm_content=cmp-true

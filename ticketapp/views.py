@@ -58,14 +58,12 @@ class TicketDetail(LoginRequiredMixin, View):
                         staff_listing[team].append(user)
             print(staff_listing)
 
-            status_options = {
-                0: 'Open',
-                1: 'Assigned',
-                2: 'Parked',
-                3: 'Closed',
-            }
-
-            form = TicketUpdateForm
+            
+            form = TicketUpdateForm(initial = {
+                'status': ticket.status,
+                'assigned_team': ticket.assigned_team,
+                'assigned_member': ticket.assigned_member,
+            })
 
             return render(
                 request,
@@ -73,7 +71,6 @@ class TicketDetail(LoginRequiredMixin, View):
                 {
                     'ticket': ticket,
                     'user': loggedUser,
-                    'status_options': status_options,
                     'staff_listing': staff_listing,
                     'form': form,
                 },
@@ -92,14 +89,16 @@ class TicketDetail(LoginRequiredMixin, View):
             print("valid form")
             ticket = get_object_or_404(Ticket, id=ticket_id)
             ticket.status = form['status'].value()
-            ticket.assigned_team = form['team'].value()
-            ticket.assigned_member = form['member'].value()
+            newTeam = Team.objects.filter(pk=form['assigned_team'].value())[0]
+            ticket.assigned_team = newTeam
+            if form['assigned_member'].value():
+                newMember = User.objects.filter(pk=form['assigned_member'].value())[0]
+                ticket.assigned_member = newMember
             ticket.save()
         else:
             print("invalid form")
             print(form.errors.as_data())
             print(f"from form: ${form['assigned_team']}")
-            # print(form)
 
         return redirect('TicketDetail', ticket_id=ticket_id)
 

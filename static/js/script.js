@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function(){
             let pk = row.getAttribute("data-ticket");
             let currentURL = window.location.href;
             let newURL = currentURL.replace('ticket_list/', `view/${pk}`);
-            // console.log(currentURL, newURL);
             window.open(newURL, name="_self");
         })
     };
@@ -30,30 +29,8 @@ document.addEventListener("DOMContentLoaded", function(){
     let selectItems = document.getElementsByTagName("select");
     for (item of selectItems) {
         item.addEventListener("change", function(e) {
-            // function for change of status
-            if (e.target.name == "status"){
-                showBtn(saveBtn);
-            }
-            // function for change of team
-            else if (e.target.name == "assigned_team"){
-                console.log(e.target.name);
-                let assignedTeam = document.getElementById("team");
-                let teamSlug = slugify(assignedTeam.value);
-                let memberOptions = document.getElementsByName("member");
-                for (member of memberOptions){
-                    member.setAttribute("disabled", "");
-                    member.classList.add("visually-hidden");
-                }
-                let selectedTeam = document.getElementsByClassName(teamSlug)[0];
-                selectedTeam.removeAttribute("disabled");
-                selectedTeam.classList.remove("visually-hidden");
-                showBtn(saveBtn);                
-            }
-            // function for change of member
-            else if (e.target.name == "assigned_member") {
-                console.log(e.target.name);
-                showBtn(saveBtn);
-            }
+            showBtn(saveBtn);
+            // Need to implement list modification depending on team members
         })
     }
     
