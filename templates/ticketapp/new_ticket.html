@@ -10,11 +10,10 @@
             <form method="post" style="margin-top: 1.3em;">
                 {{ ticket_form | crispy }}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-log-ticket btn-lg">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
             </form>
 </div>
 </div>
 </div>
-
 
 {% endblock %}

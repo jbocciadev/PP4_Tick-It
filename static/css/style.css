@@ -84,7 +84,7 @@ table {
 
 /* Footer styling */
 footer {
-    /* position:fixed; */
+    position:fixed;
     background-color:lightgray;
     width: 100%;
     bottom: 0;

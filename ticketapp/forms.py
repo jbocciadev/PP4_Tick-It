@@ -12,15 +12,14 @@ class TicketForm(forms.ModelForm):
         fields = ('title', 'content',)
 
 
-teams = Team.objects.all()
-staff = Profile.objects.filter(~Q(role=0)).values('user')
-
-staff_list = []
-for i in staff :
-    staff_list.append(i["user"])
-
-
 class TicketUpdateForm(forms.ModelForm):
+    teams = Team.objects.all()
+    staff = Profile.objects.filter(~Q(role=0)).values('user')
+
+    staff_list = []
+    for i in staff:
+        staff_list.append(i["user"])
+
     status = forms.ChoiceField(required=True, choices=[
         (0, "Open"),
         (1, "Assigned"),

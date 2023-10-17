@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import Ticket, Profile, Team, Ticket
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import TicketUpdateForm
+from .forms import TicketUpdateForm, TicketForm
 
 
 def landing_page(request):
@@ -58,8 +58,7 @@ class TicketDetail(LoginRequiredMixin, View):
                         staff_listing[team].append(user)
             print(staff_listing)
 
-            
-            form = TicketUpdateForm(initial = {
+            form = TicketUpdateForm(initial={
                 'status': ticket.status,
                 'assigned_team': ticket.assigned_team,
                 'assigned_member': ticket.assigned_member,
