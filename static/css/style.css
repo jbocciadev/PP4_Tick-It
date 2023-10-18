@@ -66,6 +66,13 @@ table {
     box-shadow: 0.25rem 0.25rem .5rem rgba(0, 0, 0, .5);
 }
 
+#tickets-table {
+    box-shadow: 0.25rem 0.25rem .5rem rgba(0, 0, 0, .5);
+}
+.pagination .current {
+    color: #000;
+    border: none;
+}
 
 .btn-log-ticket {
     background-color: indigo;
