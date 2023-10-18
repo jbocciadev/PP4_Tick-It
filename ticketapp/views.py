@@ -25,9 +25,16 @@ class TicketList(LoginRequiredMixin, generic.ListView):
         loggedUser = self.request.user
 
         if loggedUser.profile.role == 0:
+            print('customer')
             return Ticket.objects.filter(Q(author=loggedUser)).prefetch_related('author').order_by('-created_on')
         else:
+            print('staff')
             return Ticket.objects.filter(~Q(status=3)).prefetch_related('author').order_by('-created_on')
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['loggedUser'] = self.request.user
+        return context
 
     template_name = 'ticket_list.html'
     paginate_by = 15

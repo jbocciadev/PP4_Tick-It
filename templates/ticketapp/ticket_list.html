@@ -24,44 +24,47 @@
 <div class="container-fluid list_container">
     <div class="row">
         <div class="col-10 offset-1">
-            <!-- <div class="card"> -->
-                <!-- <div class="card-body"> -->
-                    <table class="table table-bordered table-hover" id="tickets-table">
-                        <thead class="table-info">
-                        <tr class="list_header">
-                            <th scope="col">ID</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Team</th>
-                            <th scope="col">Member</th>
-                            <th scope="col">Created</th>
-                            
-                        </tr>
-                        </thead>
-                        <tbody>
+            {{ loggedUser.profile.team }}
+            <table class="table table-bordered table-hover" id="tickets-table">
+                <thead class="table-info">
+                    <tr class="list_header">
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Team</th>
+                        {% if loggedUser.profile.role != 0 %}
+                        <th scope="col">Member</th>
+                        {% endif %}
+                        
+                        <th scope="col">Created</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
 
-                            {% for ticket in ticket_list %}
-                                    <tr class="ticket-row" data-ticket="{{ ticket.id }}">                                
-                                        <th class="list_header" scope="row"># {{ ticket.id }} </th>
-                                        <td>{{ ticket.title }}</td>
-                                        <td>{{ ticket.author.profile.user }}</td>
-                                        <td>{{ ticket.get_status_display }}</td>
-                                        <td>{{ ticket.assigned_team }}</td>
-                                        {% if ticket.assigned_member == None %}
-                                            <td></td>
-                                        {% else %}
-                                            <td>{{ ticket.assigned_member }}</td>
-                                        {% endif %}
-                                        <td>{{ ticket.created_on | date }}</td>
-                                        
-                                    </tr>  
-                            {% endfor %}
-                            
-                        </tbody>
-                    </table>
-                <!-- </div> -->
-            <!-- </div> -->
+                    {% for ticket in ticket_list %}
+                            <tr class="ticket-row" data-ticket="{{ ticket.id }}">                                
+                                <th class="list_header" scope="row"># {{ ticket.id }} </th>
+                                <td>{{ ticket.title }}</td>
+                                <td>{{ ticket.author.profile.user }}</td>
+                                <td>{{ ticket.get_status_display }}</td>
+                                <td>{{ ticket.assigned_team }}</td>
+                                {% if loggedUser.profile.role != 0 %}
+                                    {% if ticket.assigned_member == None %}
+                                        <td></td>
+                                    {% else %}
+                                        <td>{{ ticket.assigned_member }}</td>
+                                    {% endif %}
+                                {% endif %}
+
+                                <td>{{ ticket.created_on | date }}</td>
+                                
+                            </tr>  
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
         </div>
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">

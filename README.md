@@ -136,3 +136,6 @@ https://docs.djangoproject.com/en/4.2/ref/models/querysets/ (see Q https://docs.
 
 Prepopulating forms with current values:
 https://studygyaan.com/django/how-to-give-initial-value-to-model-forms?utm_content=cmp-true
+
+Getting context data:
+https://docs.djangoproject.com/en/4.2/ref/class-based-views/mixins-multiple-object/#django.views.generic.list.MultipleObjectMixin.get_context_data

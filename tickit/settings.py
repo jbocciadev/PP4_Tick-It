@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'tickit',
     'bootstrap5',
     'django_bootstrap_icons',
- 
+
 ]
 
 SITE_ID = 1
