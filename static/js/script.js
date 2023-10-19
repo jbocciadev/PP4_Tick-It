@@ -1,4 +1,4 @@
-// Script to add Event listeners to ticket-list rows
+// transform string into slug
 const slugify = str =>
   str
     .toLowerCase()
@@ -13,7 +13,9 @@ function showBtn (btn) {
     btn.parentElement.classList.remove("visually-hidden");        
 };
 
+// Script to add Event listeners
 document.addEventListener("DOMContentLoaded", function(){
+    // Open detail view for clicked ticket
     let rows = document.getElementsByClassName("ticket-row");
     for (let row of rows) {
         row.addEventListener("click", function() {

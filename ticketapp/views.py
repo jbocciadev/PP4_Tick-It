@@ -54,9 +54,7 @@ class TicketDetail(LoginRequiredMixin, View):
             # Creating empty dict to store values
             staff_listing = {}
             teams = Team.objects.all().values()
-            # print(teams)
             users = User.objects.all()
-
             #  Iterating through teams to create staff listing with keys:values
             for team in teams:
                 staff_listing[team['name']] = []
@@ -68,16 +66,6 @@ class TicketDetail(LoginRequiredMixin, View):
                         # print(user_teams)
                     if str(team['name']) in user_teams:
                         staff_listing[team['name']].append(user)
-            # print(staff_listing)
-
-            # ticketTeam = ticket.assigned_team
-            # print(str(ticketTeam))
-
-            # teamsList = Profile.objects.filter(user=loggedUser).values_list('teams').values()
-            # print(teamsList)
-            # print(loggedUser)
-
-            # ticketTeam = Team.objects.get()
 
             statusForm = TicketStatusUpdateForm(initial={
                 'status': ticket.status})
@@ -113,6 +101,7 @@ class TicketDetail(LoginRequiredMixin, View):
 
     def post(self, request, ticket_id, *args, **kwargs):
         form = TicketUpdateForm(request.POST)
+        
         # print("posted")
 
         if form.is_valid():

@@ -30,7 +30,8 @@ class TicketStatusUpdateForm(forms.ModelForm):
 class TicketTeamUpdateForm(forms.ModelForm):
     # Form to update assigned team on ticket
     assigned_team = forms.ModelChoiceField(queryset=Team.objects.all())
-    assigned_team.widget.attrs.update({'class': 'form-select'})
+    assigned_team.widget.attrs.update(
+            {'class': 'form-select ticket-detail-form-select'})
 
     class Meta:
         model = Ticket
@@ -49,7 +50,8 @@ class TicketMemberUpdateForm(forms.ModelForm):
             blank=True,
             queryset=User.objects.filter(profile__in=profiles)
             )
-        self.fields['assigned_member'].widget.attrs.update({'class': 'form-select'})
+        self.fields['assigned_member'].widget.attrs.update(
+            {'class': 'form-select ticket-detail-form-select'})
 
     class Meta:
         model = Ticket
@@ -70,7 +72,8 @@ class TicketUpdateForm(forms.ModelForm):
         (1, "Assigned"),
         (2, "Parked"),
         (3, "Closed")])
-    status.widget.attrs.update({'class': 'form-select'})
+    status.widget.attrs.update(
+            {'class': 'form-select ticket-detail-form-select'})
 
     assigned_team = forms.ModelChoiceField(queryset=Team.objects.all())
     assigned_team.widget.attrs.update({'class': 'form-select'})
