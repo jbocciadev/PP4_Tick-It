@@ -27,13 +27,19 @@ document.addEventListener("DOMContentLoaded", function(){
     };
 
     // Event listeners for ticketDetail form
+    let form = document.getElementById("assignmentForm");
     let saveBtn = document.getElementById("saveBtn");    
     let selectItems = document.getElementsByTagName("select");
+    let teamSelect = document.getElementById("id_assigned_team");
     for (item of selectItems) {
-        item.addEventListener("change", function(e) {
-            showBtn(saveBtn);
-            // Need to implement list modification depending on team members
-        })
+        if (item == teamSelect){
+            item.addEventListener("change", function(){
+                form.submit();
+            })
+        } else  {
+            item.addEventListener("change", function() {
+                showBtn(saveBtn);
+            })}
     }
     
 })
