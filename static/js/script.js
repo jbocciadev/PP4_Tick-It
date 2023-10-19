@@ -31,9 +31,11 @@ document.addEventListener("DOMContentLoaded", function(){
     let saveBtn = document.getElementById("saveBtn");    
     let selectItems = document.getElementsByTagName("select");
     let teamSelect = document.getElementById("id_assigned_team");
+    let memberSelect = document.getElementById("id_assigned_member");
     for (item of selectItems) {
         if (item == teamSelect){
             item.addEventListener("change", function(){
+                memberSelect.setAttribute("disabled","");
                 form.submit();
             })
         } else  {

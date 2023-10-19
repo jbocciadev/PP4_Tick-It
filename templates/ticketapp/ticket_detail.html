@@ -52,20 +52,6 @@
                         
                     <form id="assignmentForm" action="{% url 'TicketDetail' ticket_id=ticket.id %}" method="post">
                         {% csrf_token %}
-
-                        <!-- <li class="list-group-item">
-                            <label for="status" class="form-label">Status: </label>
-                            {{ form.status }}
-                        </li>
-
-                        <li class="list-group-item">
-                            <label for="assigned_team" class="form-label">Assigned team: </label>
-                            {{teamForm.assigned_team}}
-
-                            <label for="member" class="form-label">Assigned member:</label>
-                            {{memberForm.assigned_member}}
-                        </li> -->
-
                         <li class="list-group-item">
                             {{ statusForm.as_p }}
                         </li>
