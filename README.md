@@ -139,3 +139,10 @@ https://studygyaan.com/django/how-to-give-initial-value-to-model-forms?utm_conte
 
 Getting context data:
 https://docs.djangoproject.com/en/4.2/ref/class-based-views/mixins-multiple-object/#django.views.generic.list.MultipleObjectMixin.get_context_data
+
+Known issue:
+Ticket list display on smaller screens breaks the boundaries and becomes scroll-left-to-right
+
+Querying:
+ - Field lookups: https://docs.djangoproject.com/en/4.2/ref/models/querysets/#field-lookups
+ - One-to-one relationships: https://docs.djangoproject.com/en/4.2/topics/db/examples/one_to_one/

@@ -39,7 +39,21 @@
                             {{ form.assigned_team }}
 
                             <label for="member" class="form-label">Assigned member:</label>
+                            {% for i in form.assigned_team.choices %}
                             {{  form.assigned_member }}
+                            {% endfor %}
+                            {{ form.assigned_team.choices }}
+                            {{  form.assigned_member }}
+                        </li>
+
+                        <li class="list-group-item">
+                            {{statusForm.status}}
+                        </li>
+                        <li class="list-group-item">
+                            {{teamForm.assigned_team}}
+                        </li>
+                        <li class="list-group-item">
+                            {{memberForm.assigned_member}}
                         </li>
 
 

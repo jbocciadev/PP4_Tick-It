@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 from .models import Ticket, Profile, Team, Ticket
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import TicketUpdateForm, TicketForm
+from .forms import (
+    TicketUpdateForm, TicketForm, TicketStatusUpdateForm, TicketTeamUpdateForm, TicketMemberUpdateForm
+)
 
 
 def landing_page(request):
@@ -25,12 +27,13 @@ class TicketList(LoginRequiredMixin, generic.ListView):
         loggedUser = self.request.user
 
         if loggedUser.profile.role == 0:
-            print('customer')
+            # print('customer')
             return Ticket.objects.filter(Q(author=loggedUser)).prefetch_related('author').order_by('-created_on')
         else:
-            print('staff')
+            # print('staff')
             return Ticket.objects.filter(~Q(status=3)).prefetch_related('author').order_by('-created_on')
-    
+
+    # Adding loggedUser data to the context to limit the fields displayed by the view
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['loggedUser'] = self.request.user
@@ -50,20 +53,38 @@ class TicketDetail(LoginRequiredMixin, View):
         if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
             # Creating empty dict to store values
             staff_listing = {}
-            teams = Team.objects.all()
+            teams = Team.objects.all().values()
+            # print(teams)
             users = User.objects.all()
 
-            #  Iterating through teams to create keys for dict
+            #  Iterating through teams to create staff listing with keys:values
             for team in teams:
-                staff_listing[team] = []
+                staff_listing[team['name']] = []
                 # Iterating through users to see if they are in team and add to listing
                 for user in users:
                     user_teams = []
                     for i in user.profile.teams.values():
                         user_teams.append(i['name'])
-                    if str(team) in user_teams:
-                        staff_listing[team].append(user)
-            print(staff_listing)
+                        # print(user_teams)
+                    if str(team['name']) in user_teams:
+                        staff_listing[team['name']].append(user)
+            # print(staff_listing)
+
+            # ticketTeam = ticket.assigned_team
+            # print(str(ticketTeam))
+
+            # teamsList = Profile.objects.filter(user=loggedUser).values_list('teams').values()
+            # print(teamsList)
+            # print(loggedUser)
+
+            # ticketTeam = Team.objects.get()
+
+            statusForm = TicketStatusUpdateForm(initial={
+                'status': ticket.status})
+            teamForm = TicketTeamUpdateForm(initial={
+                'assigned_team': ticket.assigned_team})
+            memberForm = TicketMemberUpdateForm(initial={
+                'assigned_member': ticket.assigned_member}, assigned_team = ticket.assigned_team)
 
             form = TicketUpdateForm(initial={
                 'status': ticket.status,
@@ -79,6 +100,9 @@ class TicketDetail(LoginRequiredMixin, View):
                     'user': loggedUser,
                     'staff_listing': staff_listing,
                     'form': form,
+                    'statusForm': statusForm,
+                    'teamForm': teamForm,
+                    'memberForm': memberForm,
                 },
             )
         else:
@@ -89,10 +113,10 @@ class TicketDetail(LoginRequiredMixin, View):
 
     def post(self, request, ticket_id, *args, **kwargs):
         form = TicketUpdateForm(request.POST)
-        print("posted")
+        # print("posted")
 
         if form.is_valid():
-            print("valid form")
+            # print("valid form")
             ticket = get_object_or_404(Ticket, id=ticket_id)
             ticket.status = form['status'].value()
             newTeam = Team.objects.filter(pk=form['assigned_team'].value())[0]
@@ -101,36 +125,13 @@ class TicketDetail(LoginRequiredMixin, View):
                 newMember = User.objects.filter(pk=form['assigned_member'].value())[0]
                 ticket.assigned_member = newMember
             ticket.save()
-        else:
-            print("invalid form")
-            print(form.errors.as_data())
-            print(f"from form: ${form['assigned_team']}")
+        # else:
+            # print("invalid form")
+            # print(form.errors.as_data())
+            # print(f"from form: ${form['assigned_team']}")
 
         return redirect('TicketDetail', ticket_id=ticket_id)
 
-
-# class UpdateStatus(LoginRequiredMixin, View):
-#     def post(self, request, ticket_id, *args, **kwargs):
-#         form = StatusForm(request.POST)
-
-#         if form.is_valid():
-#             ticket = get_object_or_404(Ticket, id=ticket_id)
-#             ticket.status = form['status'].value()
-#             ticket.save()
-
-#         return redirect('TicketDetail', ticket_id=ticket_id)
-
-
-# class UpdateAssignment(LoginRequiredMixin, View):
-#     def post(self, request, ticket_id, *args, **kwargs):
-#         form = AssignmentForm(request.POST)
-
-#         if form.is_valid():
-#             ticket = get_object_or_404(Ticket, id=ticket_id)
-#             ticket.status = form['status'].value()
-#             ticket.save()
-
-#         return redirect('TicketDetail', ticket_id=ticket_id)
 
 class NewTicket(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
