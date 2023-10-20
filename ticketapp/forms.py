@@ -37,7 +37,7 @@ class TicketTeamUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Ticket
-        fields = ('assigned_team',)
+        fields = ('assigned_team', 'author',)
 
 
 class TicketMemberUpdateForm(forms.ModelForm):

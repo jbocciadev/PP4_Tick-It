@@ -35,7 +35,18 @@
                         </li>
                         {% else %}
                         <li class="list-group-item">Status: {{ ticket.get_status_display }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateStatus' ticket_id=ticket.id %}">Change Status</a> </li>
-                        <li class="list-group-item">Assigned team: {{ ticket.assigned_team }}</li>
+                        {% endif %}
+                        {% if teamForm %}
+                        <li class="list-group-item">
+                            <form id="ticketForm" action="{% url 'UpdateTeam' ticket_id=ticket.id %}" method="post">
+                                {% csrf_token %}
+                                {{ TeamForm.assigned_team }}
+                                <!-- {{ statusForm.author }} -->
+                                <button type="submit">Save</button>
+                            </form>
+                        </li>
+                        {% else %}
+                        <li class="list-group-item">Assigned team: {{ ticket.assigned_team }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateTeam' ticket_id=ticket.id %}">Change Team</a> </li>
                         {% endif %}
                         
                         {% if ticket.assigned_member == None %}
