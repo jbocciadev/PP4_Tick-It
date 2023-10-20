@@ -22,10 +22,10 @@ class TicketStatusUpdateForm(forms.ModelForm):
         (3, "Closed")])
     status.widget.attrs.update({'class': 'form-select',
                                 'id': 'status_select'})
-
+    
     class Meta:
         model = Ticket
-        fields = ('status')
+        fields = ('status', 'author', 'assigned_member')
 
 
 class TicketTeamUpdateForm(forms.ModelForm):

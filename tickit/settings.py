@@ -32,8 +32,9 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 # DEBUG = False
 
 
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = ['localhost']
 ALLOWED_HOSTS.append(os.environ["ALLOWED_HOSTS"])
+
 
 
 # Application definition

@@ -48,8 +48,10 @@ class UpdateStatus(LoginRequiredMixin, View):
         loggedUser = request.user
         ticket = get_object_or_404(Ticket, id=ticket_id)
         if loggedUser.profile.role != 0:
+            print(f"author: {ticket.author}")
             statusForm = TicketStatusUpdateForm(initial={
-                'status': ticket.status})
+                'status': ticket.status,
+                'author': ticket.author})
             return render(
                 request,
                 "ticketapp/ticket_detail.html",
@@ -66,14 +68,22 @@ class UpdateStatus(LoginRequiredMixin, View):
             )
 
     def post(self, request, ticket_id, *args, **kwargs):
-        statusForm = TicketStatusUpdateForm(request.POST)
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+        statusForm = TicketStatusUpdateForm(request.POST, instance=ticket)
+        # ticket = get_object_or_404(Ticket, id=ticket_id)
+        # statusForm.author = ticket.author
         if statusForm.is_valid():
-            print(statusForm)
+            print(f"valid form: {statusForm}")
             # newStatus = statusForm.fields['status']
             # ticket = get_object_or_404(Ticket, id=ticket_id)
             # ticket.status = newStatus
             # ticket.save()
             statusForm.save()
+            return redirect('TicketDetail', ticket_id=ticket_id)
+
+        else:
+            print(f"invalid form {statusForm}")
+        return redirect('TicketDetail', ticket_id=ticket_id)
 
 
 class TicketDetail(LoginRequiredMixin, View):

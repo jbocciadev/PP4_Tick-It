@@ -28,7 +28,8 @@
                         <li class="list-group-item">
                             <form id="ticketForm" action="{% url 'UpdateStatus' ticket_id=ticket.id %}" method="post">
                                 {% csrf_token %}
-                                {{ statusForm.as_p }}
+                                {{ statusForm.status }}
+                                {{ statusForm.author }}
                                 <button type="submit">Save</button>
                             </form>
                         </li>
