@@ -1,11 +1,13 @@
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
-from django.contrib.auth.models import User
-from .models import Ticket, Profile, Team, Ticket
+from .models import Ticket
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import (
-    TicketUpdateForm, TicketForm, TicketStatusUpdateForm, TicketTeamUpdateForm, TicketMemberUpdateForm
+    TicketForm,
+    TicketStatusUpdateForm,
+    TicketTeamUpdateForm,
+    TicketMemberUpdateForm
 )
 
 
@@ -14,6 +16,30 @@ def landing_page(request):
         return redirect('/ticket_list')
     else:
         return render(request, 'index.html')
+
+
+class NewTicket(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+
+        return render(
+            request,
+            "ticketapp/new_ticket.html",
+            {
+                'ticket_form': TicketForm()
+            },
+        )
+
+    def post(self, request, *args, **kwargs):
+        ticket_form = TicketForm(data=request.POST)
+
+        if ticket_form.is_valid():
+            ticket_form.instance.author = request.user
+            ticket = ticket_form.save(commit=False)
+            ticket.save()
+        else:
+            ticket_form = TicketForm
+
+        return redirect('/ticket_list')
 
 
 class TicketList(LoginRequiredMixin, generic.ListView):
@@ -43,6 +69,30 @@ class TicketList(LoginRequiredMixin, generic.ListView):
     paginate_by = 15
 
 
+class TicketDetail(LoginRequiredMixin, View):
+
+    def get(self, request, ticket_id, *args, **kwargs):
+        # renders the individual ticket only if the user created it or if the user is staff/manager
+        loggedUser = request.user
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+
+        if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
+
+            return render(
+                request,
+                "ticketapp/ticket_detail.html",
+                {
+                    'ticket': ticket,
+                    'user': loggedUser,
+                },
+            )
+        else:
+            return render(
+                request,
+                'ticketapp/no_access.html'
+            )
+
+
 class UpdateStatus(LoginRequiredMixin, View):
     def get(self, request, ticket_id, *args, **kwargs):
         loggedUser = request.user
@@ -50,7 +100,8 @@ class UpdateStatus(LoginRequiredMixin, View):
         if loggedUser.profile.role != 0:
             statusForm = TicketStatusUpdateForm(initial={
                 'status': ticket.status,
-                'author': ticket.author})
+                'author': ticket.author}
+                )
             return render(
                 request,
                 "ticketapp/ticket_detail.html",
@@ -70,10 +121,13 @@ class UpdateStatus(LoginRequiredMixin, View):
         ticket = get_object_or_404(Ticket, id=ticket_id)
         statusForm = TicketStatusUpdateForm(request.POST, instance=ticket)
         if statusForm.is_valid():
+            print("statusForm valid")
             statusForm.save()
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
+            print("statusForm not valid")
+            print(statusForm)
             return redirect('TicketDetail', ticket_id=ticket_id)
 
 
@@ -83,8 +137,7 @@ class UpdateTeam(LoginRequiredMixin, View):
         ticket = get_object_or_404(Ticket, id=ticket_id)
         if loggedUser.profile.role != 0:
             teamForm = TicketTeamUpdateForm(initial={
-                'team': ticket.assigned_team,
-                # 'status': ticket.status,
+                'assigned_team': ticket.assigned_team,
                 'author': ticket.author})
             return render(
                 request,
@@ -92,7 +145,7 @@ class UpdateTeam(LoginRequiredMixin, View):
                 {
                     'ticket': ticket,
                     'user': loggedUser,
-                    'statusForm': teamForm,
+                    'teamForm': teamForm,
                 }
             )
         else:
@@ -102,74 +155,39 @@ class UpdateTeam(LoginRequiredMixin, View):
             )
 
     def post(self, request, ticket_id, *args, **kwargs):
+        print(f"teamForm submitted")
         ticket = get_object_or_404(Ticket, id=ticket_id)
-        statusForm = TicketStatusUpdateForm(request.POST, instance=ticket)
-        if statusForm.is_valid():
-            statusForm.save()
+        print(ticket.author)
+        teamForm = TicketTeamUpdateForm(request.POST, instance=ticket)
+        if teamForm.is_valid():
+            print(f"teamForm valid")
+            teamForm.save()
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
+            print(f"teamForm not valid")
+            print(teamForm)
             return redirect('TicketDetail', ticket_id=ticket_id)
 
 
-
-
-
-class TicketDetail(LoginRequiredMixin, View):
-
+class UpdateMember(LoginRequiredMixin, View):
     def get(self, request, ticket_id, *args, **kwargs):
-        # renders the individual ticket only if the user created it or if the user is not a customer
         loggedUser = request.user
         ticket = get_object_or_404(Ticket, id=ticket_id)
-
-        if loggedUser.profile.role != 0 or loggedUser.id == ticket.author.id:
-            # Creating empty dict to store values
-            staff_listing = {}
-            teams = Team.objects.all().values()
-            users = User.objects.all()
-            #  Iterating through teams to create staff listing with keys:values
-            for team in teams:
-                staff_listing[team['name']] = []
-                # Iterating through users to see if they are in team and add to listing
-                for user in users:
-                    user_teams = []
-                    for i in user.profile.teams.values():
-                        user_teams.append(i['name'])
-                        # print(user_teams)
-                    if str(team['name']) in user_teams:
-                        staff_listing[team['name']].append(user)
-
-            statusForm = TicketStatusUpdateForm(initial={
-                'status': ticket.status},
-                prefix='status')
-
-            teamForm = TicketTeamUpdateForm(initial={
-                'assigned_team': ticket.assigned_team},
-                prefix='team')
+        if loggedUser.profile.role != 0:
             memberForm = TicketMemberUpdateForm(initial={
-                'assigned_member': ticket.assigned_member},
-                prefix='member',
-                assigned_team=ticket.assigned_team)
-
-            form = TicketUpdateForm(initial={
-                'status': ticket.status,
                 'assigned_team': ticket.assigned_team,
-                'assigned_member': ticket.assigned_member,
-            },
+                'author': ticket.author,
+                'member': ticket.assigned_member},
                 assigned_team=ticket.assigned_team)
-
             return render(
                 request,
                 "ticketapp/ticket_detail.html",
                 {
                     'ticket': ticket,
                     'user': loggedUser,
-                    'staff_listing': staff_listing,
-                    'form': form,
-                    # 'statusForm': statusForm,
-                    # 'teamForm': teamForm,
-                    # 'memberForm': memberForm,
-                },
+                    'memberForm': memberForm,
+                }
             )
         else:
             return render(
@@ -177,61 +195,17 @@ class TicketDetail(LoginRequiredMixin, View):
                 'ticketapp/no_access.html'
             )
 
-    # def post(self, request, ticket_id, *args, **kwargs):
-        # print(request.POST)
-        # form = TicketUpdateForm(request.POST)
-        # if form.is_valid():
-        #     form.save()
+    def post(self, request, ticket_id, *args, **kwargs):
+        print(f"memberForm submitted")
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+        print(ticket.author)
+        memberForm = TicketMemberUpdateForm(request.POST, instance=ticket, assigned_team=ticket.assigned_team)
+        if memberForm.is_valid():
+            print(f"memberForm valid")
+            memberForm.save()
+            return redirect('TicketDetail', ticket_id=ticket_id)
 
-        # if 'status' in request.POST:
-        #     postedStatusform = TicketStatusUpdateForm(request.POST)
-        #     if postedStatusform.is_valid():
-        #         statusForm.save()
-        #     else:
-        #         print(postedStatusform.errors.as_data())
-        
-        # form = TicketUpdateForm(request.POST)
-        # print(form)
-    
-        # print("posted")
-
-        # if form.is_valid():
-            # print("valid form")
-            # ticket = get_object_or_404(Ticket, id=ticket_id)
-        #     ticket.status = form['status'].value()
-        #     newTeam = Team.objects.filter(pk=form['assigned_team'].value())[0]
-        #     ticket.assigned_team = newTeam
-        #     if form['assigned_member'].value():
-        #         newMember = User.objects.filter(pk=form['assigned_member'].value())[0]
-        #         ticket.assigned_member = newMember
-        #     ticket.save()
-        # else:
-        #     print("invalid form")
-        #     print(form.errors.as_data())
-            # print(f"from form: ${form['assigned_team']}")
-
-        return redirect('TicketDetail', ticket_id=ticket_id)
-
-
-class NewTicket(LoginRequiredMixin, View):
-    def get(self, request, *args, **kwargs):
-
-        return render(
-            request,
-            "ticketapp/new_ticket.html",
-            {
-                'ticket_form': TicketForm()
-            },
-        )
-
-    def post(self, request, *args, **kwargs):
-        ticket_form = TicketForm(data=request.POST)
-
-        if ticket_form.is_valid():
-            ticket_form.instance.author = request.user
-            ticket = ticket_form.save(commit=False)
-            ticket.save()
         else:
-            ticket_form = TicketForm
-
-        return redirect('/ticket_list')
+            print(f"memberForm not valid")
+            print(memberForm)
+            return redirect('TicketDetail', ticket_id=ticket_id)

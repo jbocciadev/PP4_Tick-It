@@ -24,68 +24,53 @@
                         <li class="list-group-item">Status: {{ ticket.get_status_display }}</li>
                         <li class="list-group-item">Assigned team: {{ ticket.assigned_team }}</li>
                     {% else %}
+
                         {% if statusForm %}
-                        <li class="list-group-item">
-                            <form id="ticketForm" action="{% url 'UpdateStatus' ticket_id=ticket.id %}" method="post">
-                                {% csrf_token %}
-                                {{ statusForm.status }}
-                                {{ statusForm.author }}
-                                <button type="submit">Save</button>
-                            </form>
-                        </li>
+                            <li class="list-group-item">
+                                <form id="ticketForm" action="{% url 'UpdateStatus' ticket_id=ticket.id %}" method="post">
+                                    {% csrf_token %}
+                                    {{ statusForm.status }}
+                                    {{ statusForm.author.as_hidden }}
+                                    {{ statusForm.assigned_member.as_hiden }}
+                                    <button type="submit">Save</button>
+                                </form>
+                            </li>
+                        {% elif teamForm or memberForm %}
+                            <li class="list-group-item">Status: {{ ticket.get_status_display }}</li>
                         {% else %}
-                        <li class="list-group-item">Status: {{ ticket.get_status_display }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateStatus' ticket_id=ticket.id %}">Change Status</a> </li>
+                            <li class="list-group-item">Status: {{ ticket.get_status_display }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateStatus' ticket_id=ticket.id %}">Change Status</a> </li>
                         {% endif %}
-                        {% if teamForm %}
-                        <li class="list-group-item">
-                            <form id="ticketForm" action="{% url 'UpdateTeam' ticket_id=ticket.id %}" method="post">
-                                {% csrf_token %}
-                                {{ TeamForm.assigned_team }}
-                                <!-- {{ statusForm.author }} -->
-                                <button type="submit">Save</button>
-                            </form>
-                        </li>
+
+                        {% if teamForm %}                        
+                            <li class="list-group-item">
+                                <form id="ticketForm" action="{% url 'UpdateTeam' ticket_id=ticket.id %}" method="post">
+                                    {% csrf_token %}
+                                    {{ teamForm.assigned_team }}
+                                    {{ teamForm.author.as_hidden }}
+                                    <button type="submit">Save</button>
+                                </form>
+                            </li>
+                        {% elif statusForm or memberForm %}
+                        <li class="list-group-item">Assigned team: {{ ticket.assigned_team }}</li>
                         {% else %}
-                        <li class="list-group-item">Assigned team: {{ ticket.assigned_team }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateTeam' ticket_id=ticket.id %}">Change Team</a> </li>
+                            <li class="list-group-item">Assigned team: {{ ticket.assigned_team }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateTeam' ticket_id=ticket.id %}">Change Team</a> </li>
                         {% endif %}
-                        
-                        {% if ticket.assigned_member == None %}
-                            <li class="list-group-item">Assigned member:</li>
+
+                        {% if memberForm %}
+                            <li class="list-group-item">
+                                <form id="ticketForm" action="{% url 'UpdateMember' ticket_id=ticket.id %}" method="post">
+                                    {% csrf_token %}
+                                    {{ memberForm.assigned_member }}
+                                    {{ memberForm.assigned_team.as_hidden }}
+                                    {{ teamForm.author.as_hidden }}
+                                    <button type="submit">Save</button>
+                                </form>
+                            </li>
                         {% else %}
-                            <li class="list-group-item">Assigned member: {{ ticket.assigned_member }}</li>
-                        {% endif %}                     
-
-
-
-                    <form id="ticketForm" action="{% url 'TicketDetail' ticket_id=ticket.id %}" method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                    </form>
-<!--                         
-                    <form id="statusForm" action="{% url 'TicketDetail' ticket_id=ticket.id %}" method="post">
-                        {% csrf_token %}
-                        <li class="list-group-item">
-                            {{ statusForm.as_p }}
-                        </li>
-                    </form>
-                    <form id="teamForm" action="{% url 'TicketDetail' ticket_id=ticket.id %}" method="post">
-                        {% csrf_token %}
-                        <li class="list-group-item">
-                            {{ teamForm.as_p }}
-                        </li>
-                    </form>
-                    <form id="memberForm" action="{% url 'TicketDetail' ticket_id=ticket.id %}" method="post">
-                        {% csrf_token %}
-                        <li class="list-group-item">
-                            {{ memberForm.as_p }}
-                        </li>
-                    </form> -->
+                            <li class="list-group-item">Assigned member: {{ ticket.assigned_member }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateMember' ticket_id=ticket.id %}">Change Member</a> </li>
+                        {% endif %}
 
                     {% endif %}
-
-                <!-- <div class="card-body">
-        
-                </div> -->
             </div>
         </div>
     </div>
