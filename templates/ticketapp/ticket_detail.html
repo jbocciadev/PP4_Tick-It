@@ -3,17 +3,25 @@
 {% block content %}
 <div class="container">
     
+    
     <div class="row">
         <div class="col col-8 offset-2">
             <div class="card">
                 <div class="card-header">
+
+                    {% if statusForm or teamForm or memberForm %}
+                        <a class="btn btn-success float-end btn-sm" href="{% url 'TicketDetail' ticket_id=ticket.id %}">Back to Ticket</a>
+                    {% else %}
+                        <a class="btn btn-success float-end btn-sm" href="{% url 'TicketList' %}">Back to List</a>
+                    {% endif %}
+
                     <div>
                         <span>Ticket #: {{ ticket.id }}</span>
                     </div>
                 </div>
                 <div class="card-header">
                     <div>
-                        <span>Created: {{ ticket.created_on | date:"d/m/Y" }}</span>
+                        <span>Created: {{ ticket.created_on | date:"d/m/Y" }}  by {{ ticket.author }}</span>
                     </div>
                 </div>
                 <ul class="list-group list-group-flush">
