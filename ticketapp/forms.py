@@ -20,18 +20,20 @@ class TicketStatusUpdateForm(forms.ModelForm):
         (1, "Assigned"),
         (2, "Parked"),
         (3, "Closed")])
-    status.widget.attrs.update({'class': 'form-select'})
+    status.widget.attrs.update({'class': 'form-select',
+                                'id': 'status_select'})
 
     class Meta:
         model = Ticket
-        fields = ('status',)
+        fields = ('status')
 
 
 class TicketTeamUpdateForm(forms.ModelForm):
     # Form to update assigned team on ticket
     assigned_team = forms.ModelChoiceField(queryset=Team.objects.all())
     assigned_team.widget.attrs.update(
-            {'class': 'form-select ticket-detail-form-select ticket-team-form-select'})
+            {'class': 'form-select ticket-detail-form-select ticket-team-form-select',
+                'id': 'team_select'})
 
     class Meta:
         model = Ticket
@@ -52,21 +54,28 @@ class TicketMemberUpdateForm(forms.ModelForm):
             queryset=User.objects.filter(profile__in=profiles)
             )
         self.fields['assigned_member'].widget.attrs.update(
-            {'class': 'form-select ticket-detail-form-select'})
+            {'class': 'form-select ticket-detail-form-select',
+                'id': 'member_select'})
 
     class Meta:
         model = Ticket
         fields = ('assigned_member',)
 
 
-
 class TicketUpdateForm(forms.ModelForm):
-    teams = Team.objects.all()
-    staff = Profile.objects.filter(~Q(role=0)).values('user')
+    def __init__(self, *args, **kwargs):
+        assigned_team = kwargs.pop('assigned_team')
+        profiles = Profile.objects.filter(teams=assigned_team)
 
-    staff_list = []
-    for i in staff:
-        staff_list.append(i["user"])
+        super(TicketUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['assigned_member'] = forms.ModelChoiceField(
+            blank=True,
+            required=False,
+            queryset=User.objects.filter(profile__in=profiles)
+            )
+        self.fields['assigned_member'].widget.attrs.update(
+            {'class': 'form-select ticket-detail-form-select',
+                'id': 'member_select'})
 
     status = forms.ChoiceField(required=True, choices=[
         (0, "Open"),
@@ -74,14 +83,18 @@ class TicketUpdateForm(forms.ModelForm):
         (2, "Parked"),
         (3, "Closed")])
     status.widget.attrs.update(
-            {'class': 'form-select ticket-detail-form-select'})
+            {'class': 'form-select ticket-detail-form-select',
+                'id': 'status_select'})
 
-    # assigned_team = forms.ModelChoiceField(queryset=Team.objects.all())
-    # assigned_team.widget.attrs.update({'class': 'form-select'})
+    assigned_team = forms.ModelChoiceField(queryset=Team.objects.all())
+    assigned_team.widget.attrs.update({'class': 'form-select',
+                'id': 'team_select'})
 
-    # assigned_member = forms.ModelChoiceField(queryset=User.objects.filter(pk__in=staff_list), required=False)
-    # assigned_member.widget.attrs.update({'class': 'form-select'})
+    
 
     class Meta:
         model = Ticket
         fields = ('status', 'assigned_team', 'assigned_member')
+
+            # assigned_member = forms.ModelChoiceField(queryset=User.objects.filter(pk__in=staff_list), required=False)
+    # assigned_member.widget.attrs.update({'class': 'form-select'})

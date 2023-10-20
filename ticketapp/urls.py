@@ -8,4 +8,5 @@ urlpatterns = [
     # path('update_status/<ticket_id>', views.UpdateStatus.as_view(), name="UpdateStatus"),
     # path('update_assignment/<ticket_id>', views.UpdateAssignment.as_view(), name="UpdateAssignment"),
     path('new_ticket/', views.NewTicket.as_view(), name="NewTicket"),
+    path('update_status/<ticket_id>', views.UpdateStatus.as_view(), name="UpdateStatus"),
 ]

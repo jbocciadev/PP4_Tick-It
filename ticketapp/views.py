@@ -43,6 +43,39 @@ class TicketList(LoginRequiredMixin, generic.ListView):
     paginate_by = 15
 
 
+class UpdateStatus(LoginRequiredMixin, View):
+    def get(self, request, ticket_id, *args, **kwargs):
+        loggedUser = request.user
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+        if loggedUser.profile.role != 0:
+            statusForm = TicketStatusUpdateForm(initial={
+                'status': ticket.status})
+            return render(
+                request,
+                "ticketapp/ticket_detail.html",
+                {
+                    'ticket': ticket,
+                    'user': loggedUser,
+                    'statusForm': statusForm,
+                }
+            )
+        else:
+            return render(
+                request,
+                'ticketapp/no_access.html'
+            )
+
+    def post(self, request, ticket_id, *args, **kwargs):
+        statusForm = TicketStatusUpdateForm(request.POST)
+        if statusForm.is_valid():
+            print(statusForm)
+            # newStatus = statusForm.fields['status']
+            # ticket = get_object_or_404(Ticket, id=ticket_id)
+            # ticket.status = newStatus
+            # ticket.save()
+            statusForm.save()
+
+
 class TicketDetail(LoginRequiredMixin, View):
 
     def get(self, request, ticket_id, *args, **kwargs):
@@ -68,17 +101,23 @@ class TicketDetail(LoginRequiredMixin, View):
                         staff_listing[team['name']].append(user)
 
             statusForm = TicketStatusUpdateForm(initial={
-                'status': ticket.status})
+                'status': ticket.status},
+                prefix='status')
+
             teamForm = TicketTeamUpdateForm(initial={
-                'assigned_team': ticket.assigned_team})
+                'assigned_team': ticket.assigned_team},
+                prefix='team')
             memberForm = TicketMemberUpdateForm(initial={
-                'assigned_member': ticket.assigned_member}, assigned_team = ticket.assigned_team)
+                'assigned_member': ticket.assigned_member},
+                prefix='member',
+                assigned_team=ticket.assigned_team)
 
             form = TicketUpdateForm(initial={
                 'status': ticket.status,
                 'assigned_team': ticket.assigned_team,
                 'assigned_member': ticket.assigned_member,
-            })
+            },
+                assigned_team=ticket.assigned_team)
 
             return render(
                 request,
@@ -88,7 +127,7 @@ class TicketDetail(LoginRequiredMixin, View):
                     'user': loggedUser,
                     'staff_listing': staff_listing,
                     'form': form,
-                    'statusForm': statusForm,
+                    # 'statusForm': statusForm,
                     'teamForm': teamForm,
                     'memberForm': memberForm,
                 },
@@ -99,24 +138,37 @@ class TicketDetail(LoginRequiredMixin, View):
                 'ticketapp/no_access.html'
             )
 
-    def post(self, request, ticket_id, *args, **kwargs):
-        form = TicketUpdateForm(request.POST)
+    # def post(self, request, ticket_id, *args, **kwargs):
+        # print(request.POST)
+        # form = TicketUpdateForm(request.POST)
+        # if form.is_valid():
+        #     form.save()
+
+        # if 'status' in request.POST:
+        #     postedStatusform = TicketStatusUpdateForm(request.POST)
+        #     if postedStatusform.is_valid():
+        #         statusForm.save()
+        #     else:
+        #         print(postedStatusform.errors.as_data())
         
+        # form = TicketUpdateForm(request.POST)
+        # print(form)
+    
         # print("posted")
 
-        if form.is_valid():
+        # if form.is_valid():
             # print("valid form")
-            ticket = get_object_or_404(Ticket, id=ticket_id)
-            ticket.status = form['status'].value()
-            newTeam = Team.objects.filter(pk=form['assigned_team'].value())[0]
-            ticket.assigned_team = newTeam
-            if form['assigned_member'].value():
-                newMember = User.objects.filter(pk=form['assigned_member'].value())[0]
-                ticket.assigned_member = newMember
-            ticket.save()
+            # ticket = get_object_or_404(Ticket, id=ticket_id)
+        #     ticket.status = form['status'].value()
+        #     newTeam = Team.objects.filter(pk=form['assigned_team'].value())[0]
+        #     ticket.assigned_team = newTeam
+        #     if form['assigned_member'].value():
+        #         newMember = User.objects.filter(pk=form['assigned_member'].value())[0]
+        #         ticket.assigned_member = newMember
+        #     ticket.save()
         # else:
-            # print("invalid form")
-            # print(form.errors.as_data())
+        #     print("invalid form")
+        #     print(form.errors.as_data())
             # print(f"from form: ${form['assigned_team']}")
 
         return redirect('TicketDetail', ticket_id=ticket_id)

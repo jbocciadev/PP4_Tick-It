@@ -27,21 +27,38 @@ document.addEventListener("DOMContentLoaded", function(){
     };
 
     // Event listeners for ticketDetail form
-    let form = document.getElementById("assignmentForm");
-    let saveBtn = document.getElementById("saveBtn");    
-    let selectItems = document.getElementsByTagName("select");
-    let teamSelect = document.getElementById("id_assigned_team");
-    let memberSelect = document.getElementById("id_assigned_member");
-    for (item of selectItems) {
-        if (item == teamSelect){
-            item.addEventListener("change", function(){
-                memberSelect.setAttribute("disabled","");
-                form.submit();
-            })
-        } else  {
-            item.addEventListener("change", function() {
-                showBtn(saveBtn);
-            })}
-    }
+    // let saveBtn = document.getElementById("saveBtn");  
+    
+    // let ticketForm = document.getElementById("ticketForm");
+    // let statusForm = document.getElementById("statusForm");
+    // let teamForm = document.getElementById("teamForm");
+    // let memberForm = document.getElementById("memberForm");
+    // let selectItems = document.getElementsByTagName("select");
+    // let teamSelect = document.getElementById("team_select");
+    // let memberSelect = document.getElementById("member_select");
+    // let statusSelect = document.getElementById("status_select");
+    // // let myModal = new bootstrap.Modal(document.getElementById("exampleModal"),{});
+    // // console.log(selectItems);
+    // for (item of selectItems) {
+    //     if (item == statusSelect){
+    //         item.addEventListener("change", function(){
+    //             // teamSelect.setAttribute("disabled", "");
+    //             // memberSelect.setAttribute("disabled", "");
+    //             ticketForm.submit();
+    //         })
+    //     } else if (item == teamSelect) {
+    //         item.addEventListener("change", function() {
+    //             // statusSelect.setAttribute("disabled", "");
+    //             // memberSelect.setAttribute("disabled", "");
+    //             teamForm.submit();
+    //         })
+    //     } else {
+    //         item.addEventListener("change", function(){
+    //             // statusSelect.setAttribute("disabled", "");
+    //             // teamSelect.setAttribute("disabled", "");
+    //             memberForm.submit();
+    //         })
+    //     }
+    // }
     
 })
