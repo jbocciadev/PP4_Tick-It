@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-<!-- {% load bootstrap_icons %} -->
+{% load bootstrap_icons %}
 {% block content %}
 
 
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-10">
+        <div class="col-12 col-md-10 offset-md-1">
             <ul class="nav nav-pills justify-content-around">
                 <li class="nav-item">
-                    <a class="btn btn-success btn-lg" aria-current="page" href="{% url 'NewTicket'%}">New ticket</a>
+                    <a class="btn btn-success btn-lg" aria-current="page" href="{% url 'NewTicket'%}">New ticket {% bs_icon 'file-earmark-plus' size='2rem' %} </a>
                 </li>
             </ul>
         </div>

@@ -150,6 +150,13 @@ footer i {
     padding:0;
 } */
 
+.table-hover td:hover {
+    cursor: zoom-in;
+}
+
+.card-header {
+    --bs-tertiary-bg-rgb: 211,211,211;
+}
 
 /* ### Hover effect for navbar buttons ### */
 .hvr-sweep-to-top {

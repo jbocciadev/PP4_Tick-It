@@ -1,25 +1,35 @@
 {% extends "base.html" %}
-
+{% load bootstrap_icons %}
 {% block content %}
 <div class="container">
     
-    
     <div class="row">
-        <div class="col col-8 offset-2">
-            <div class="card">
-                <div class="card-header">
+        <div class="col-12 col-md-10 offset-md-1">
+            <ul class="nav nav-pills justify-content-around">
 
                     {% if statusForm or teamForm or memberForm %}
-                        <a class="btn btn-success float-end btn-sm" href="{% url 'TicketDetail' ticket_id=ticket.id %}">Back to Ticket</a>
+                    <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketDetail' ticket_id=ticket.id %}">Back to Ticket</a></li>
                     {% else %}
-                        <a class="btn btn-success float-end btn-sm" href="{% url 'TicketList' %}">Back to List</a>
+                    <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketList' %}">Back to List {% bs_icon 'list-ol' size='1.5rem' %}</a></li>
+                    {% endif %}
+                    {% if user.profile.role == 0 %}
+                    <li class="nav-item"><a class="btn btn-danger float-end btn-sm" href="{% url 'TicketList' %}">Delete ticket {% bs_icon 'file-earmark-minus' size='1.25rem' %} </a></li>
                     {% endif %}
 
+
+            </ul>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-8 offset-2">
+            <div class="card">
+                <div class="card-header bg-body-tertiary">
                     <div>
                         <span>Ticket #: {{ ticket.id }}</span>
                     </div>
                 </div>
-                <div class="card-header">
+                <div class="card-header bg-body-tertiary">
                     <div>
                         <span>Created: {{ ticket.created_on | date:"d/m/Y" }}  by {{ ticket.author }}</span>
                     </div>
