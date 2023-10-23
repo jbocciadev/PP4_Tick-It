@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
 from .models import Ticket, User
 from django.db.models import Q
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import (
     TicketForm,
@@ -13,7 +14,7 @@ from .forms import (
 
 def landing_page(request):
     if request.user.is_authenticated:
-        return redirect('/ticket_list')
+        return redirect('TicketList')
     else:
         return render(request, 'index.html')
 
@@ -36,6 +37,8 @@ class NewTicket(LoginRequiredMixin, View):
             ticket_form.instance.author = request.user
             ticket = ticket_form.save(commit=False)
             ticket.save()
+            messages.success(request, 'Your ticket has been logged!')
+
         else:
             ticket_form = TicketForm
 
@@ -125,6 +128,7 @@ class UpdateStatus(LoginRequiredMixin, View):
             # print("statusForm valid")
             # print(statusForm)
             statusForm.save()
+            messages.warning(request, f"You have changed ticket {ticket_id}'s status")
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
@@ -165,6 +169,7 @@ class UpdateTeam(LoginRequiredMixin, View):
         if teamForm.is_valid():
             # print(f"teamForm valid")
             teamForm.save()
+            messages.warning(request, f"You have assigned ticket {ticket_id} to a different team")
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
@@ -210,6 +215,7 @@ class UpdateMember(LoginRequiredMixin, View):
         if memberForm.is_valid():
             # print(f"memberForm valid")
             memberForm.save()
+            messages.warning(request, f"You have assigned ticket {ticket_id} to a different user")
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
@@ -229,6 +235,7 @@ class DeleteTicket(LoginRequiredMixin, View):
             )
         else:
             ticket.delete()
+            messages.error(request, 'Your ticket has been deleted')
             return redirect('TicketList')
 
 

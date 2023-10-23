@@ -2,6 +2,18 @@
 {% load bootstrap_icons %}
 {% block content %}
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show text-center" id="msg" role="alert">
+                {{ message | safe }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
 
   <!-- Ticket-deletion confirm modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
