@@ -11,7 +11,6 @@ body {
     font-family: 'Rubik', sans-serif;
 }
 
-
 /* Navbar styling */
 .navbar-brand {
     background-color: indigo;
@@ -32,16 +31,18 @@ body {
     font-weight: bolder;
  }
 /* End of Navbar styling */
+
+/* Landing page styling */
 .home-section {
     display: grid;
     width: 100%;
-    height: 100%;
+    height: 85vh;
         /* overflow: hidden; */
 
 }
 .background {
     background-image: url(https://res.cloudinary.com/dj6z5zmmy/image/upload/v1697477589/static/media/landing-background.9232705898d4.webp);
-    /* height: 100%; */
+    height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -53,6 +54,9 @@ body {
     position: relative;
     /* overflow: hidden; */
 }
+/* End of landing page styling */
+
+
 
 .main-section {
     background-color: #fff;
