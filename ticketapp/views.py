@@ -230,8 +230,7 @@ class DeleteTicket(LoginRequiredMixin, View):
         else:
             ticket.delete()
             return redirect('TicketList')
-        
+
 
 def NoAccess(request):
     return render(request, 'ticketapp/no_access.html')
-

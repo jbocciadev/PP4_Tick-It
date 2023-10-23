@@ -10,5 +10,5 @@ urlpatterns = [
     path('update_status/<ticket_id>', views.UpdateStatus.as_view(), name="UpdateStatus"),
     path('update_team/<ticket_id>', views.UpdateTeam.as_view(), name="UpdateTeam"),
     path('update_member/<ticket_id>', views.UpdateMember.as_view(), name="UpdateMember"),
-    path('delete_ticket/<ticket_id', views.DeleteTicket.as_view(), name="DeleteTicket"),
+    path('delete_ticket/<ticket_id>', views.DeleteTicket.as_view(), name="DeleteTicket"),
 ]
