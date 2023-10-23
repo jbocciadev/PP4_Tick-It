@@ -8,7 +8,7 @@
             <ul class="nav nav-pills justify-content-around">
 
                     {% if statusForm or teamForm or memberForm %}
-                    <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketDetail' ticket_id=ticket.id %}">Back to Ticket</a></li>
+                    <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketDetail' ticket_id=ticket.id %}">Back to Ticket {% bs_icon 'file-earmark-ruled' size='1.25rem' %}</a></li>
                     {% else %}
                     <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketList' %}">Back to List {% bs_icon 'list-ol' size='1.5rem' %}</a></li>
                     {% endif %}
@@ -49,8 +49,8 @@
                                     {% csrf_token %}
                                     {{ statusForm.status }}
                                     {{ statusForm.author.as_hidden }}
-                                    {{ statusForm.assigned_member.as_hiden }}
-                                    <button type="submit">Save</button>
+                                    <!-- {{ statusForm.assigned_member.as_hiden }} -->
+                                    <button class="btn btn-success" type="submit">Save</button>
                                 </form>
                             </li>
                         {% elif teamForm or memberForm %}
@@ -65,7 +65,8 @@
                                     {% csrf_token %}
                                     {{ teamForm.assigned_team }}
                                     {{ teamForm.author.as_hidden }}
-                                    <button type="submit">Save</button>
+                                    {{ teamForm.assigned_member.as_hiden }}
+                                    <button class="btn btn-success" type="submit">Save</button>
                                 </form>
                             </li>
                         {% elif statusForm or memberForm %}
@@ -79,11 +80,12 @@
                                 <form id="ticketForm" action="{% url 'UpdateMember' ticket_id=ticket.id %}" method="post">
                                     {% csrf_token %}
                                     {{ memberForm.assigned_member }}
-                                    {{ memberForm.assigned_team.as_hidden }}
                                     {{ teamForm.author.as_hidden }}
-                                    <button type="submit">Save</button>
+                                    <button class="btn btn-success" type="submit">Save</button>
                                 </form>
                             </li>
+                        {% elif statusForm or teamForm %}
+                        <li class="list-group-item">Assigned member: {{ ticket.assigned_member }}</li>
                         {% else %}
                             <li class="list-group-item">Assigned member: {{ ticket.assigned_member }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateMember' ticket_id=ticket.id %}">Change Member</a> </li>
                         {% endif %}

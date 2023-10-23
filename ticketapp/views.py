@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
-from .models import Ticket
+from .models import Ticket, User
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import (
@@ -100,7 +100,8 @@ class UpdateStatus(LoginRequiredMixin, View):
         if loggedUser.profile.role != 0:
             statusForm = TicketStatusUpdateForm(initial={
                 'status': ticket.status,
-                'author': ticket.author}
+                'author': ticket.author,
+                'assigned_member': ticket.assigned_member}
                 )
             return render(
                 request,
@@ -121,13 +122,14 @@ class UpdateStatus(LoginRequiredMixin, View):
         ticket = get_object_or_404(Ticket, id=ticket_id)
         statusForm = TicketStatusUpdateForm(request.POST, instance=ticket)
         if statusForm.is_valid():
-            print("statusForm valid")
+            # print("statusForm valid")
+            # print(statusForm)
             statusForm.save()
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
-            print("statusForm not valid")
-            print(statusForm)
+            # print("statusForm not valid")
+            # print(statusForm)
             return redirect('TicketDetail', ticket_id=ticket_id)
 
 
@@ -138,7 +140,8 @@ class UpdateTeam(LoginRequiredMixin, View):
         if loggedUser.profile.role != 0:
             teamForm = TicketTeamUpdateForm(initial={
                 'assigned_team': ticket.assigned_team,
-                'author': ticket.author})
+                'author': ticket.author,
+                'assigned_member': ticket.assigned_member})
             return render(
                 request,
                 "ticketapp/ticket_detail.html",
@@ -155,18 +158,18 @@ class UpdateTeam(LoginRequiredMixin, View):
             )
 
     def post(self, request, ticket_id, *args, **kwargs):
-        print(f"teamForm submitted")
+        # print(f"teamForm submitted")
         ticket = get_object_or_404(Ticket, id=ticket_id)
-        print(ticket.author)
+        # print(ticket.author)
         teamForm = TicketTeamUpdateForm(request.POST, instance=ticket)
         if teamForm.is_valid():
-            print(f"teamForm valid")
+            # print(f"teamForm valid")
             teamForm.save()
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
-            print(f"teamForm not valid")
-            print(teamForm)
+            # print(f"teamForm not valid")
+            # print(teamForm)
             return redirect('TicketDetail', ticket_id=ticket_id)
 
 
@@ -178,7 +181,7 @@ class UpdateMember(LoginRequiredMixin, View):
             memberForm = TicketMemberUpdateForm(initial={
                 'assigned_team': ticket.assigned_team,
                 'author': ticket.author,
-                'member': ticket.assigned_member},
+                'assigned_member': ticket.assigned_member},
                 assigned_team=ticket.assigned_team)
             return render(
                 request,
@@ -196,16 +199,20 @@ class UpdateMember(LoginRequiredMixin, View):
             )
 
     def post(self, request, ticket_id, *args, **kwargs):
-        print(f"memberForm submitted")
+        # print(f"memberForm submitted")
         ticket = get_object_or_404(Ticket, id=ticket_id)
-        print(ticket.author)
-        memberForm = TicketMemberUpdateForm(request.POST, instance=ticket, assigned_team=ticket.assigned_team)
+        # print(ticket.author)
+        memberForm = TicketMemberUpdateForm(
+            request.POST,
+            instance=ticket,
+            assigned_team=ticket.assigned_team
+            )
         if memberForm.is_valid():
-            print(f"memberForm valid")
+            # print(f"memberForm valid")
             memberForm.save()
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
-            print(f"memberForm not valid")
-            print(memberForm)
+            # print(f"memberForm not valid")
+            # print(memberForm)
             return redirect('TicketDetail', ticket_id=ticket_id)

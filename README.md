@@ -146,3 +146,11 @@ Ticket list display on smaller screens breaks the boundaries and becomes scroll-
 Querying:
  - Field lookups: https://docs.djangoproject.com/en/4.2/ref/models/querysets/#field-lookups
  - One-to-one relationships: https://docs.djangoproject.com/en/4.2/topics/db/examples/one_to_one/
+
+
+ ======================
+
+
+Known issues
+
+team-assign: Once a member value is assigned, if the team is changed, the same member value will remain until it is changed, even when the member does not belong to that team.
