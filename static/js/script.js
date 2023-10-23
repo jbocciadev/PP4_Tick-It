@@ -10,12 +10,6 @@ document.addEventListener("DOMContentLoaded", function(){
             window.open(newURL, name="_self");
         })
     };
-    // Auto-dismiss message alerts
-    setTimeout(function(){
-        let message = document.getElementById("msg");
-        let alert = new bootstrap.Alert(message);
-        alert.close();
-    }, 3000);
 
-
+    
 })

@@ -150,7 +150,7 @@ Querying:
 
  ======================
 
-
 Known issues
 
-team-assign: Once a member value is assigned, if the team is changed, the same member value will remain until it is changed, even when the member does not belong to that team.
+Messages: there are instances where the JS for dismissing the messages generates an error. To this moment, I have 
+    followed the steps laid out during the blog walkthrough and did troubleshooting and checked online, but due to ...
