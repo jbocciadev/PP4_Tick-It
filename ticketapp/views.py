@@ -216,3 +216,22 @@ class UpdateMember(LoginRequiredMixin, View):
             # print(f"memberForm not valid")
             # print(memberForm)
             return redirect('TicketDetail', ticket_id=ticket_id)
+
+
+class DeleteTicket(LoginRequiredMixin, View):
+    def get(self, request, ticket_id, *args, **kwargs):
+        loggedUser = request.user
+        ticket = get_object_or_404(Ticket, id=ticket_id)
+        if loggedUser != ticket.author:
+            return render(
+                request,
+                'ticketapp/no_access.html'
+            )
+        else:
+            ticket.delete()
+            return redirect('TicketList')
+        
+
+def NoAccess(request):
+    return render(request, 'ticketapp/no_access.html')
+

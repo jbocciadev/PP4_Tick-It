@@ -12,8 +12,8 @@
                     {% else %}
                     <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketList' %}">Back to List {% bs_icon 'list-ol' size='1.5rem' %}</a></li>
                     {% endif %}
-                    {% if user.profile.role == 0 %}
-                    <li class="nav-item"><a class="btn btn-danger float-end btn-sm" href="{% url 'TicketList' %}">Delete ticket {% bs_icon 'file-earmark-minus' size='1.25rem' %} </a></li>
+                    {% if user == ticket.author %}
+                    <li class="nav-item"><a class="btn btn-danger float-end btn-sm" href="{% url 'DeleteTicket' %}">Delete ticket {% bs_icon 'file-earmark-minus' size='1.25rem' %} </a></li>
                     {% endif %}
 
 
