@@ -59,6 +59,10 @@ body {
     padding-top: 1rem;
 }
 
+.newTicketForm {
+    margin: 1.25rem 0;
+}
+
 .list_container{
     padding-top: 1rem;
 
