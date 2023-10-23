@@ -63,6 +63,10 @@ body {
     margin: 1.25rem 0;
 }
 
+.ticketDetailSubmit{
+    margin-top: 0.5rem;
+}
+
 .list_container{
     padding-top: 1rem;
 

@@ -3,11 +3,7 @@
 {% block content %}
 
 
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-  </button> -->
-  
-  <!-- Modal -->
+  <!-- Ticket-deletion confirm modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -27,12 +23,10 @@
     </div>
   </div>
   
-<div class="container">
-    
+<div class="container">    
     <div class="row">
         <div class="col-12 col-md-10 offset-md-1">
             <ul class="nav nav-pills justify-content-around">
-
                     {% if statusForm or teamForm or memberForm %}
                     <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketDetail' ticket_id=ticket.id %}">Back to Ticket {% bs_icon 'file-earmark-ruled' size='1.25rem' %}</a></li>
                     {% else %}
@@ -44,8 +38,6 @@
                             Delete ticket {% bs_icon 'file-earmark-minus' size='1.25rem' %}
                           </button>
                     {% endif %}
-
-
             </ul>
         </div>
     </div>
@@ -79,7 +71,7 @@
                                     {{ statusForm.status }}
                                     {{ statusForm.author.as_hidden }}
                                     <!-- {{ statusForm.assigned_member.as_hiden }} -->
-                                    <button class="btn btn-success" type="submit">Save</button>
+                                    <button class="btn btn-success ticketDetailSubmit" type="submit">Save</button>
                                 </form>
                             </li>
                         {% elif teamForm or memberForm %}
@@ -95,7 +87,7 @@
                                     {{ teamForm.assigned_team }}
                                     {{ teamForm.author.as_hidden }}
                                     {{ teamForm.assigned_member.as_hiden }}
-                                    <button class="btn btn-success" type="submit">Save</button>
+                                    <button class="btn btn-success ticketDetailSubmit" type="submit">Save</button>
                                 </form>
                             </li>
                         {% elif statusForm or memberForm %}
@@ -110,7 +102,7 @@
                                     {% csrf_token %}
                                     {{ memberForm.assigned_member }}
                                     {{ teamForm.author.as_hidden }}
-                                    <button class="btn btn-success" type="submit">Save</button>
+                                    <button class="btn btn-success ticketDetailSubmit" type="submit">Save</button>
                                 </form>
                             </li>
                         {% elif statusForm or teamForm %}
