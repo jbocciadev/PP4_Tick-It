@@ -48,15 +48,29 @@ body {
     overflow: hidden;
     margin-top:-1rem;
     background-repeat: no-repeat;
-    justify-self:center;
     width: 100%;
     background-position: center;
-    position: relative;
-    /* overflow: hidden; */
 }
 /* End of landing page styling */
 
+.welcome-card {
+    min-width: 80vw !important;
+    padding: 1rem;
+    opacity: .8;
+}
+.card-ti {
+    font-family: 'Rubik', sans-serif;
+    color: limegreen;
+    background-color: indigo;
+    border-radius: 10px;
+    padding: .3rem;
+}
 
+.welcome-card p {
+    font-weight: 600;
+    font-size: 1.05rem;
+    opacity: ;
+}
 
 .main-section {
     background-color: #fff;
@@ -143,8 +157,10 @@ footer i {
 .footer_text {
     background-color: slategray;
     color: #fff;
+    font-weight: 100;
+    font-size: 1.1rem;
     margin: 0;
-    padding: 0;
+    padding: 0.5rem 0 0 0;
 }
 .footer_container {
     /* border-top: 1px solid slategray; */
