@@ -1,15 +1,13 @@
 # [>_ tick·it](https://pp4-tickit-9f996504db3b.herokuapp.com/)
 
-Where in the world is... Diego Santacarmen? is a command-line educational game that pays tribute to the 1985 classic ["Where in the world is Carmen Sandiego?"](https://en.wikipedia.org/wiki/Where_in_the_World_Is_Carmen_Sandiego%3F_(1985_video_game)#:~:text=Where%20in%20the%20World%20is%20Carmen%20Sandiego%3F%20is%20an%20educational,Facts%2C%20published%20by%20Pharos%20Books.).
-
-The player will have to chase the thief while collecting clues and arrest the right suspect before time runs out.
+tick·it is a simple, user-friendly online ticketing system. With tick·it, your tickets will be resolved in no time, satisfaction guaranteed!
 
 [Try it here!](https://pp4-tickit-9f996504db3b.herokuapp.com/)
 
 ![Responsive Mockup](/readme_files/tickit-responsive.jpg)
 
-## The game
-The player is presented with the facts of the case and sent to the crime scene. There, they will have to interrogate the witnesses and follow the clues to either make an arrest, or travel to the next location where they will gather further clues. 
+## The application
+Based on real-life remedy ticketing systems, tick·it was developed with a user-first approach. With a clean, minimalistic visual design, users can easily find the information they are looking for. For staff, the interface is simple and clear, helping them save valuable time they can invest in fixing the issue, instead of navigating a complicated ticketing system UI.
 
 ## Features
 
@@ -268,6 +266,12 @@ Form to update team member assignment, based on assigned team // https://stackov
 
 Database ERD:
 https://dbdiagram.io/d
+
+code validators:
+HTML: https://validator.w3.org/
+CSS: https://jigsaw.w3.org/css-validator/
+JS: https://jshint.com/
+Python: VScode built-in "Problems" panel display.
  ======================
 
 Known issues
