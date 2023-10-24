@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <img class=" img-responsive rounded mx-auto d-block" src="{% static 'media/404-not-found.jpg' %}" alt="Image of broken PC, resource not found">
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}
+{% endblock %}

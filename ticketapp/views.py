@@ -47,8 +47,8 @@ class NewTicket(LoginRequiredMixin, View):
 
 class TicketList(LoginRequiredMixin, generic.ListView):
     # Returns list of tickets.
-    # If user is staff, only return open tickets. If user is customer,
-    # only return user-created tickets
+    # If user is staff, only return non-closed tickets. If user is customer,
+    # only return user-created tickets.
     redirect_field_name = '/accounts/login'
     model = Ticket
 
