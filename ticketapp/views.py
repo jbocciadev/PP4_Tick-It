@@ -56,13 +56,12 @@ class TicketList(LoginRequiredMixin, generic.ListView):
         loggedUser = self.request.user
 
         if loggedUser.profile.role == 0:
-            # print('customer')
             return Ticket.objects.filter(Q(author=loggedUser)).prefetch_related('author').order_by('-created_on')
         else:
-            # print('staff')
             return Ticket.objects.filter(~Q(status=3)).prefetch_related('author').order_by('-created_on')
 
-    # Adding loggedUser data to the context to limit the fields displayed by the view
+    # Adding loggedUser data to the context
+    # to limit the fields displayed by the view
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['loggedUser'] = self.request.user
@@ -75,7 +74,8 @@ class TicketList(LoginRequiredMixin, generic.ListView):
 class TicketDetail(LoginRequiredMixin, View):
 
     def get(self, request, ticket_id, *args, **kwargs):
-        # renders the individual ticket only if the user created it or if the user is staff/manager
+        # renders the individual ticket only if the user created it
+        # or if the user is staff/manager
         loggedUser = request.user
         ticket = get_object_or_404(Ticket, id=ticket_id)
 
@@ -125,15 +125,11 @@ class UpdateStatus(LoginRequiredMixin, View):
         ticket = get_object_or_404(Ticket, id=ticket_id)
         statusForm = TicketStatusUpdateForm(request.POST, instance=ticket)
         if statusForm.is_valid():
-            # print("statusForm valid")
-            # print(statusForm)
             statusForm.save()
             messages.warning(request, f"You have changed ticket {ticket_id}'s status")
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
-            # print("statusForm not valid")
-            # print(statusForm)
             return redirect('TicketDetail', ticket_id=ticket_id)
 
 
@@ -162,19 +158,14 @@ class UpdateTeam(LoginRequiredMixin, View):
             )
 
     def post(self, request, ticket_id, *args, **kwargs):
-        # print(f"teamForm submitted")
         ticket = get_object_or_404(Ticket, id=ticket_id)
-        # print(ticket.author)
         teamForm = TicketTeamUpdateForm(request.POST, instance=ticket)
         if teamForm.is_valid():
-            # print(f"teamForm valid")
             teamForm.save()
             messages.warning(request, f"You have assigned ticket {ticket_id} to a different team")
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
-            # print(f"teamForm not valid")
-            # print(teamForm)
             return redirect('TicketDetail', ticket_id=ticket_id)
 
 
@@ -204,23 +195,18 @@ class UpdateMember(LoginRequiredMixin, View):
             )
 
     def post(self, request, ticket_id, *args, **kwargs):
-        # print(f"memberForm submitted")
         ticket = get_object_or_404(Ticket, id=ticket_id)
-        # print(ticket.author)
         memberForm = TicketMemberUpdateForm(
             request.POST,
             instance=ticket,
             assigned_team=ticket.assigned_team
             )
         if memberForm.is_valid():
-            # print(f"memberForm valid")
             memberForm.save()
             messages.warning(request, f"You have assigned ticket {ticket_id} to a different user")
             return redirect('TicketDetail', ticket_id=ticket_id)
 
         else:
-            # print(f"memberForm not valid")
-            # print(memberForm)
             return redirect('TicketDetail', ticket_id=ticket_id)
 
 

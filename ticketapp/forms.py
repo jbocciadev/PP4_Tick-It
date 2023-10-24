@@ -41,7 +41,7 @@ class TicketTeamUpdateForm(forms.ModelForm):
 
 
 class TicketMemberUpdateForm(forms.ModelForm):
-    # Form to update team member assignment, based on assigned team // https://stackoverflow.com/questions/1697702/how-to-pass-initial-parameter-to-djangos-modelform-instance
+    # Form to update team member assignment, based on assigned team
 
     def __init__(self, *args, **kwargs):
         assigned_team = kwargs.pop('assigned_team')
@@ -88,13 +88,8 @@ class TicketUpdateForm(forms.ModelForm):
 
     assigned_team = forms.ModelChoiceField(queryset=Team.objects.all())
     assigned_team.widget.attrs.update({'class': 'form-select',
-                'id': 'team_select'})
-
-    
+                                      'id': 'team_select'})
 
     class Meta:
         model = Ticket
         fields = ('status', 'assigned_team', 'assigned_member')
-
-            # assigned_member = forms.ModelChoiceField(queryset=User.objects.filter(pk__in=staff_list), required=False)
-    # assigned_member.widget.attrs.update({'class': 'form-select'})

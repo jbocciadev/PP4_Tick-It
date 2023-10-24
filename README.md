@@ -140,8 +140,9 @@ https://studygyaan.com/django/how-to-give-initial-value-to-model-forms?utm_conte
 Getting context data:
 https://docs.djangoproject.com/en/4.2/ref/class-based-views/mixins-multiple-object/#django.views.generic.list.MultipleObjectMixin.get_context_data
 
-Known issue:
-Ticket list display on smaller screens breaks the boundaries and becomes scroll-left-to-right
+Form to update team member assignment, based on assigned team:
+https://stackoverflow.com/questions/1697702/how-to-pass-initial-parameter-to-djangos-modelform-instance
+
 
 Querying:
  - Field lookups: https://docs.djangoproject.com/en/4.2/ref/models/querysets/#field-lookups
@@ -153,9 +154,13 @@ https://imgflip.com/
 Bootstrap icons with Django:
 https://pypi.org/project/django-bootstrap-icons/
 
+Form to update team member assignment, based on assigned team // https://stackoverflow.com/questions/1697702/how-to-pass-initial-parameter-to-djangos-modelform-instance
+
  ======================
 
 Known issues
+
+Ticket list display on smaller screens breaks the boundaries and becomes scroll-left-to-right
 
 Messages: there are instances where the JS for dismissing the messages generates an error. To this moment, I have 
     followed the steps laid out during the blog walkthrough and did troubleshooting and checked online, but due to ...

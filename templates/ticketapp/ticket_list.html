@@ -20,7 +20,7 @@
         <div class="col-12 col-md-10 offset-md-1">
             <ul class="nav nav-pills justify-content-around">
                 <li class="nav-item">
-                    <a class="btn btn-success btn-lg" aria-current="page" href="{% url 'NewTicket'%}">New ticket {% bs_icon 'file-earmark-plus' size='2rem' %} </a>
+                    <a class="btn btn-success btn-lg" aria-current="page" aria-label="Create new ticket" href="{% url 'NewTicket'%}">New ticket {% bs_icon 'file-earmark-plus' size='2rem' %} </a>
                 </li>
             </ul>
         </div>
@@ -74,11 +74,11 @@
             <ul class="pagination justify-content-center">
                 
                 {% if page_obj.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
+                    <li class="page-item"><a aria-label="First page on the list" class="page-link" href="?page=1">&laquo; first</a></li>
+                    <li class="page-item"><a aria-label="Previous page on the list" class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a></li>
                 {% else %}
                     <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
+                        <a aria-hidden="true" class="page-link">Previous</a>
                     </li>
                 {% endif %}
 
@@ -87,8 +87,8 @@
                 </span>
 
                 {% if page_obj.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
-                    <li class="page-item"><a class="page-link"  href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+                    <li class="page-item"><a aria-label="Next page on the list" class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+                    <li class="page-item"><a aria-label="Last page on the list" class="page-link"  href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
                 {% endif %}
             </ul>
         </nav>

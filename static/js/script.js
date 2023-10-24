@@ -9,7 +9,5 @@ document.addEventListener("DOMContentLoaded", function(){
             let newURL = currentURL.replace('ticket_list/', `view/${pk}`);
             window.open(newURL, name="_self");
         })
-    };
-
-    
+    };    
 })

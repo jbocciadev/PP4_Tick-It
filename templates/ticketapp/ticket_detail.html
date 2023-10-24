@@ -29,7 +29,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Don't delete</button>
-          <a class="btn btn-danger" href="{% url 'DeleteTicket' ticket_id=ticket.id %}">Continue and delete this ticket</a>
+          <a class="btn btn-danger" aria-label="Confirm ticket deletion" href="{% url 'DeleteTicket' ticket_id=ticket.id %}">Continue and delete this ticket</a>
         </div>
       </div>
     </div>
@@ -40,9 +40,9 @@
         <div class="col-12 col-md-10 offset-md-1">
             <ul class="nav nav-pills justify-content-around">
                     {% if statusForm or teamForm or memberForm %}
-                    <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketDetail' ticket_id=ticket.id %}">Back to Ticket {% bs_icon 'file-earmark-ruled' size='1.25rem' %}</a></li>
+                    <li class="nav-item"><a aria-label="Navigate back to the main ticket view" class="btn btn-success float-end btn-sm" href="{% url 'TicketDetail' ticket_id=ticket.id %}">Back to Ticket {% bs_icon 'file-earmark-ruled' size='1.25rem' %}</a></li>
                     {% else %}
-                    <li class="nav-item"><a class="btn btn-success float-end btn-sm" href="{% url 'TicketList' %}">Back to List {% bs_icon 'list-ol' size='1.5rem' %}</a></li>
+                    <li class="nav-item"><a aria-label="Navigate back to the ticket list view" class="btn btn-success float-end btn-sm" href="{% url 'TicketList' %}">Back to List {% bs_icon 'list-ol' size='1.5rem' %}</a></li>
                     {% endif %}
                     {% if user == ticket.author %}
                     <li class="nav-item">
@@ -89,7 +89,7 @@
                         {% elif teamForm or memberForm %}
                             <li class="list-group-item">Status: {{ ticket.get_status_display }}</li>
                         {% else %}
-                            <li class="list-group-item">Status: {{ ticket.get_status_display }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateStatus' ticket_id=ticket.id %}">Change Status</a> </li>
+                            <li class="list-group-item">Status: {{ ticket.get_status_display }} <a aria-label="Click to update ticket status" class="btn btn-success float-end btn-sm" href="{% url 'UpdateStatus' ticket_id=ticket.id %}">Change Status</a> </li>
                         {% endif %}
 
                         {% if teamForm %}                        
@@ -105,7 +105,7 @@
                         {% elif statusForm or memberForm %}
                         <li class="list-group-item">Assigned team: {{ ticket.assigned_team }}</li>
                         {% else %}
-                            <li class="list-group-item">Assigned team: {{ ticket.assigned_team }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateTeam' ticket_id=ticket.id %}">Change Team</a> </li>
+                            <li class="list-group-item">Assigned team: {{ ticket.assigned_team }} <a aria-label="Click to change ticket assigned team" class="btn btn-success float-end btn-sm" href="{% url 'UpdateTeam' ticket_id=ticket.id %}">Change Team</a> </li>
                         {% endif %}
 
                         {% if memberForm %}
@@ -120,7 +120,7 @@
                         {% elif statusForm or teamForm %}
                         <li class="list-group-item">Assigned member: {{ ticket.assigned_member }}</li>
                         {% else %}
-                            <li class="list-group-item">Assigned member: {{ ticket.assigned_member }} <a class="btn btn-success float-end btn-sm" href="{% url 'UpdateMember' ticket_id=ticket.id %}">Change Member</a> </li>
+                            <li class="list-group-item">Assigned member: {{ ticket.assigned_member }} <a aria-label="Click to change ticket assigned team member" class="btn btn-success float-end btn-sm" href="{% url 'UpdateMember' ticket_id=ticket.id %}">Change Member</a> </li>
                         {% endif %}
 
                     {% endif %}

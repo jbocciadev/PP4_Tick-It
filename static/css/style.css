@@ -1,11 +1,6 @@
-/* comment */
+/* Importing Rubik font from Google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
-* {
-    /* border: 1px solid red; */
-    margin: 0;
-    padding: 0;
-}
 
 body {    
     font-family: 'Rubik', sans-serif;
@@ -51,8 +46,6 @@ body {
     width: 100%;
     background-position: center;
 }
-/* End of landing page styling */
-
 .welcome-card {
     min-width: 80vw !important;
     padding: 1rem;
@@ -65,42 +58,36 @@ body {
     border-radius: 10px;
     padding: .3rem;
 }
-
 .welcome-card p {
     font-weight: 600;
     font-size: 1.05rem;
 }
-
 .main-section {
     background-color: #fff;
     padding-top: 1rem;
 }
+/* End of landing page styling */
 
+/* New ticket page styling */
 .newTicketForm {
     margin: 1.25rem 0;
 }
+/* End of new ticket page styling */
 
 .ticketDetailSubmit{
     margin-top: 0.5rem;
 }
 
+/* Ticket list page styling */
 .list_container{
     padding-top: 1rem;
-
 }
-
 table {
     background-color: #fff;
 }
-
 .list_header{
     text-align: center;
 }
-
-.nav-pills .nav-link{
-    box-shadow: 0.25rem 0.25rem .5rem rgba(0, 0, 0, .5);
-}
-
 #tickets-table {
     box-shadow: 0.25rem 0.25rem .5rem rgba(0, 0, 0, .5);
 }
@@ -108,21 +95,7 @@ table {
     color: #000;
     border: none;
 }
-
-.btn-log-ticket {
-    background-color: indigo;
-    color: limegreen;
-}
-.btn-log-ticket:hover {
-    color: indigo;
-    background-color:limegreen;
-}
-
-.btn-ticket-change {
-    margin-top: .5rem;
-    background-color: limegreen;
-    color: indigo;
-}
+/* End of ticket list page styling */
 
 /* Footer styling */
 footer {
