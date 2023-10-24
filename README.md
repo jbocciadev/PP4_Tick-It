@@ -101,217 +101,143 @@ git stash
 
   - Issues were logged as either User Stories or Features, including acceptance criteria and adding comments where required. At the end of the development process, 2 User Stories had to be reassessed and classified as "Won't Have" in the MOSCOW model, due to time constraints.
 
-  - ## Under the Proverbial Hood
+## Under the Proverbial Hood
 
-    ### __Model__
-    ![Tick-It ERD](/readme_files/tick-it_ERD.PNG)
+### __Model__
+![Tick-It ERD](/readme_files/tick-it_ERD.PNG)
 
-    Along with Django's standard User model, another 3 custom models were developed:
-      1. Profile. With a one-to-one relationship with the User model, this extends the latter and provides additional information about the different application users.
-      2. Teams. This small table stores the name of the teams that will be composed be Users, via a many-to-one relationship.
-      3. Ticket. This model connects all the others and is the cornerstone of the application functionality.
-    
-    #### __Forms__
+Along with Django's standard User model, another 3 custom models were developed:
+  1. Profile. With a one-to-one relationship with the User model, this extends the latter and provides additional information about the different application users.
+  2. Teams. This small table stores the name of the teams that will be composed be Users, via a many-to-one relationship.
+  3. Ticket. This model connects all the others and is the cornerstone of the application functionality.
 
-    Django forms connect the Model and the View. Four forms comprise the forms.py file:
+#### Forms
 
-      - New ticket form:  
-        ![TicketForm](/readme_files/ticket_form.png)
+Django forms connect the Model and the View. Four forms comprise the forms.py file:
 
-      - Ticket update forms:  
-        ![3 ticket update forms](/readme_files/ticket_update_forms.png)
-    
-    ### __View__
+  - New ticket form:  
+    ![TicketForm](/readme_files/ticket_form.png)
 
-    Django views govern the behaviour and logic behind every application. 
+  - Ticket update forms:  
+    ![3 ticket update forms](/readme_files/ticket_update_forms.png)
 
-      - Landing Page View:  
-        ![Landing](/readme_files/landing_page_view.png)
+### __View__
 
-      - New Ticket View:  
-        ![New ticket](/readme_files/new_ticket_view.png)
+Django views govern the behaviour and logic behind every application. 
 
-      - Delete Ticket View:  
-        ![Delete ticket](/readme_files/delete_ticket_view.png)
-      
-      - 3 Ticket modification views, to update status, team and member.
+  - Landing Page View:  
+    ![Landing](/readme_files/landing_page_view.png)
 
-    #### __URLs__
+  - New Ticket View:  
+    ![New ticket](/readme_files/new_ticket_view.png)
 
-    Django urls.py is comprised by a list of available URLs, along with the views connected with each of these:  
-    ![tick-it URLs](/readme_files/tick-it_urls.png)
+  - Delete Ticket View:  
+    ![Delete ticket](/readme_files/delete_ticket_view.png)
+  
+  - 3 Ticket modification views, to update status, team and member.
 
-    ### __Template__
+#### URLs
 
-    Django templates define the display of the information passed on by the views.  
-    ![tick-it templates](/readme_files/tick-it_templates.png)
+Django urls.py is comprised by a list of available URLs, along with the views connected with each of these:  
+![tick-it URLs](/readme_files/tick-it_urls.png)
 
+### __Template__
 
-  ## Testing 
-
-  Along the development process, continuous manual testing was carried out so as to ensure that User Stories were satisfactorily delivered.
-
-  - Registration
-
-  | Test | Result |
-  |--|--|
-  |User can create account| OK |
-  |On account creation, user is allocated standard "customer" role| OK |
-  |User can log in and out of the account| OK |
-
-  - Navbar and footer
-
-  | Test | Result |
-  |--|--|
-  |If user is not logged in, the navbar displays "Log in" and "register" options| OK |
-  |If user is logged in, navbar displays "Log out" option| OK |
-  |Navbar is responsive to desktop/tablet/mobile screen variations| OK |
-  |All external hyperlinks direct to the appropriate url in a new browser tab| OK |
-
-  - List View
-
-  | Test | Result |
-  |--|--|
-  |On login, user is presented with a list of tickets| OK |
-  |Depending on the user's role, the list will be either of own tickets, or of other's| OK |
-  |When clicking on one of the list's rows, the full ticket is displayed| OK |
-  |Staff members can only see not-closed tickets| OK |
-  |Customers can not see team member's details| OK |
-
-  - Ticket Detail View
-
-  | Test | Result |
-  |--|--|
-  |Customers can not see team member's details| OK |
-  |New tickets can only be logged if all fields are completed| OK |
-  |Only staff members that belong to the assigned_team are displayed as options for edit| OK |
-  |Creation date and author fields are displayed| OK |
-  |"Delete Ticket" button is only available to ticket author| OK |
-
-  - Security
-
-  | Test | Result |
-  |--|--|
-  |Users cannot see ticket information if not logged in| OK |
-  |Customers can ONLY see tickets that they created| OK |
-  |Other than admin in admin view, only ticket authors can delete tickets| OK |
-  |Despite manually changing the URL, tickets that were logged by other users cannot be deleted| OK |
-
-    
+Django templates define the display of the information passed on by the views.  
+![tick-it templates](/readme_files/tick-it_templates.png)
 
 
+## Testing 
+
+Along the development process, continuous manual testing was carried out so as to ensure that User Stories were satisfactorily delivered.
+
+- Registration
+
+| Test | Result |
+|--|--|
+|User can create account| OK |
+|On account creation, user is allocated standard "customer" role| OK |
+|User can log in and out of the account| OK |
+
+- Navbar and footer
+
+| Test | Result |
+|--|--|
+|If user is not logged in, the navbar displays "Log in" and "register" options| OK |
+|If user is logged in, navbar displays "Log out" option| OK |
+|Navbar is responsive to desktop/tablet/mobile screen variations| OK |
+|All external hyperlinks direct to the appropriate url in a new browser tab| OK |
+
+- List View
+
+| Test | Result |
+|--|--|
+|On login, user is presented with a list of tickets| OK |
+|Depending on the user's role, the list will be either of own tickets, or of other's| OK |
+|When clicking on one of the list's rows, the full ticket is displayed| OK |
+|Staff members can only see not-closed tickets| OK |
+|Customers can not see team member's details| OK |
+
+- Ticket Detail View
+
+| Test | Result |
+|--|--|
+|Customers can not see team member's details| OK |
+|New tickets can only be logged if all fields are completed| OK |
+|Only staff members that belong to the assigned_team are displayed as options for edit| OK |
+|Creation date and author fields are displayed| OK |
+|"Delete Ticket" button is only available to ticket author| OK |
+
+- Security
+
+| Test | Result |
+|--|--|
+|Users cannot see ticket information if not logged in| OK |
+|Customers can ONLY see tickets that they created| OK |
+|Other than admin in admin view, only ticket authors can delete tickets| OK |
+|Despite manually changing the URL, tickets that were logged by other users cannot be deleted| OK |
+
+### __Code Validation__
+
+- HTML  
+![HTML validation](/readme_files/tick-it_HTML_validation.PNG)
+*Disclaimer: On initial testing, two lines of templating code were injected by django above the doctype declaration. This raised grave warnings in the validator and prevented it from completing further analysis of the code. As this is considered standard-practise and taught as-is in the course, I made the decision to manually remove these lines of code so as to be able to carry out a complete validation.
+
+2 Warning messages: Dismissed as invalid suggestions. The selection of these elements was by design.  
+6 Error messages: Dismissed as invalid suggestions. The code that raises the warning is injected by the django bootstrap icons extension, and beyond the scope and expertise required for this project.  
+
+- CSS  
+![CSS validation](/readme_files/tick-it_CSS_validation.PNG)  
+CSS file is compliant with the validator
+
+- JS  
+![JS validation](/readme_files/tick-it_JS_validation.PNG)
+
+- Python  
+All python code was submitted to the [Code Institute Python Linter](https://pep8ci.herokuapp.com/) tool and no errors were found, other than a number of "line too long" messages. Where feasible (and sensible) these lines were broken and indented as is usual practise. A number of these "too long" lines remain as a design decision.  
+
+- Lighthouse  
+![Lighthouse](/readme_files/tick-it_lighthouse.PNG)  
+Google Lighthouse result is satisfactory.
+
+## Tech Stack
 
 
-  ### __Game Flowchart__
 
-    > See below flowchart with the outline of the game logic:
-    ![Game Flowchart](/assets/media/pp3_diego_santacarmen_flowchart.jpg)
-
- - ### __Helper Functions__
-  The below minions have been defined to add to the visual appeal of the game:
-
-  - clear()
-
-    ```
-    from os import system
-
-    def clear():
-        """
-        Clears the terminal.
-        See https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console
-        """
-        system("clear")
-    ```
+## Deployment  
 
 
-  - t_print()
-    ```
-    def t_print(message):
-    """
-    Prints the passed string to the console, simulating a typewriter.
-    """
-    for char in message:
-        sleep(0.05)
-        print(char, end='', flush=True)
-    ```
+  
+## Known Issues and Further Development Opportunities
 
+- Ticket list display on smaller screens breaks the boundaries and becomes scrollable. The ticket list is a wide table and was designed to be viewed in larger screens.
+- Action feedback messages are sometimes accumulated and displayed in groups. These are edge cases where multiple actions are taken in a short period of time. Due to time constraints, further work on this bug cannot be carried out.
+- Manager roles were implemented initially as a way to allow for some users to have access to functionality similar to that of django admin (modifying team members, accessing deleted tickets, etc). Time constraints meant that this will be relegated to a future development cycle.
+- Ticket history, attachments and comments were initially included in the list of features, but these were relegated to future development cycles.
 
-  - travel(origin, destination)
-    ```
-    def travel(origin, destination):
-    """
-    prints a sequence simulating the waiting time of a trip to the destination.
-    """
-    trip = [".         ", " .        ", "  .       ", "   .      ", "    .     ", "     .    ", "      .   ", "       .  ", "        . ", "         ."]
-    for i in range(10):
-        clear()
-        print(f"{origin}{trip[i]}{destination}")
-        sleep(0.3)
-        cursor.hide()
-    ```
+## Credits  
 
-
-## Future Development Opportunities
-
-  - ### Here are some future implementations that were left for a further version:
-    
-    - __Rank promotion/demotion__: A reward-punishment logic can be implemented for every case resolution/failure so the player can ascend or fall in the ranks from traffic duty agent to Captain or Superintendent.
-
-    - __Leaderboard__: building on the previous point, a leaderboard, could be implemented with the different players and their ranks.
-
-    - __Coloured fonts/imagery__: as a visual improvement, colours can be implemented for the different sections/headings within the game, along with images/animations to be displayed.
-
-## Testing and known issues
-
-  - ### __Testing__
-
-    - __PEP8__ The code has been submitted to the Code Institute PEP8 lint and all major issues were fixed. The ones that remain are due to strings being too long, or a character in a docstring that the lint recognizes erroneously as an escape character (L229). With regard to the strings length, it has been decided that they are to remain as is for design purposes.
-
-      ![PEP8](/assets/media/pep8.PNG)
-
-    - Every input request has been tested with blank and invalid inputs and they handle the data as expected.
-
-    - The game has been tested both in the IDE's and heroku's terminals and they perform as expected.
-
-  - ### __Known Issues__
-
-    - An issue has been identified with the locations' descriptions' lengths. A function may be defined to parse through the individual strings and place line breaks in intervals so the text does not wrap breaking words.
-
-    - When run on Heroku, the game title does is not cleared and users can scroll up in the terminal to see the game title. Since this does not disrupts the gameplay and remains almost inperceptible as an issue, ot has been decided to leave as-is.
-
-  - ### __Bugs__
-  No bugs have been found to remain in the code as presented.
-
-## __Development and Version Control__
-
-  - The chosen IDE for the development of the application was [Gitpod](https://www.gitpod.io/).
-
-  - [GitHub](https://github.com) is the platform where the repository for "Where in the World is Diego Santacarmen" is hosted: [Jbocciadev Diego Santacarmen repository](https://github.com/jbocciadev/PP3_Diego_Santacarmen).
-
-> Throughout development, the below commands were utilised to capture and store changes:
-```
-git add .
-git commit -m "Message in quotation marks."
-git push
-```
->additionally
-```
-git pull
-git stash
-```
-
-## __Deployment__
-The application has been deployed to heroku. The steps taken were:
-
-In [heroku](https://dashboard.heroku.com/apps): 
-    
-  1. Open the "new" menu and click on "Create new app".
-  2. Fill form fields with app name and region (Europe). Click on "Create app".
-  3. In the "Settings" section, click on "Add buildpack" and add Python and NodeJS, __in that order__.
-  4. In "Deployment method", select the GitHub option and provide the repository details. Click on "Connect".
-  5. Click on "Enable Automatic Deploys" and finally, click on "Deploy Branch".
-
-
+<!-- 
 ## Credits 
 
 ### Inspiration
@@ -337,7 +263,7 @@ In [heroku](https://dashboard.heroku.com/apps):
 - A masive thank you to my mentor, Spencer and his [5pence](https://5pence.net/) site.
 
 - Thank you, thank you, thank you to the staff and colleagues at [Code Institute](https://codeinstitute.net). Course content, Tutoring sessions and (especially) Slack channels.
-
+ -->
 
 --------------------
 Extending user model:
@@ -397,7 +323,7 @@ Python: VScode built-in "Problems" panel display.
 
 Known issues
 
-Ticket list display on smaller screens breaks the boundaries and becomes scroll-left-to-right
+Ticket list display on smaller screens breaks the boundaries and becomes scrollable
 
 Messages: there are instances where the JS for dismissing the messages generates an error. To this moment, I have 
     followed the steps laid out during the blog walkthrough and did troubleshooting and checked online, but due to ...
