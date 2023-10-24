@@ -11,7 +11,70 @@ Based on real-life remedy ticketing systems, tick·it was developed with a user-
 
 ## Features
 
-- ### __The Locations__
+- ### __Registration__
+
+  - On clicking the "Register" link at the top of the page, the user is presented with a simple registration form. Once this is completed and submitted, the user is allocated the standard "user" profile, allowing them to log tickets straight-away.
+
+- ### __Main (List) View__
+
+  - Once users log in, they are brought to the ticket list view. As its name defines, the list view presents the user with the list of tickets they have access to.
+    - __Customers__ will only have access to seeing tickets they have logged, regardless of their status.
+    ![Customer list view](/readme_files/customer_list_view.PNG)
+    - __Staff and Managers__ will only be able to see tickets that have not yet been closed, so they can work on them.
+    ![Staff list view](/readme_files/staff_list_view.PNG)
+
+- ### __Ticket (Detail) View__
+
+  - __Customers__ will have access to viewing the ticket they submitted. From here, they can also delete the ticket should they wish to do so.
+  ![Customer Detail View](/readme_files/customer_detail_view.PNG)
+
+  - __Staff and Managers__ can use this view to:
+  1. Change the ticket status.
+  2. Assign the ticket to a different team.
+  3. Assign the ticket to a different team member.
+  ![Staff Detail View](/readme_files/staff_detail_view.PNG)
+
+- ### __Ticket Logging__
+  All users can open new tickets. In order to do so, they can click on the "New Ticket" button above the ticket list and fill in a very simple form. Once the ticket is submitted, it is assigned to the "Customer Care" team, who will do an initial assessment and troubleshooting and proceed according to their findings.
+  ![New ticket form](/readme_files/new_ticket_form.PNG)
+
+
+
+
+
+## Design
+
+### Wireframes
+
+  From very early in the development process, it was very clear that there was a need for simplicity and clarity. Pages are de-cluttered and minimalistic.
+
+  - __Landing Page__ 
+
+  ![Landing Page](/readme_files/Wireframes/Landing_page_wireframe.png)
+
+  - __Table View__ 
+
+  ![Landing Page](/readme_files/Wireframes/Table_view_wireframe.png)
+
+  - __Detail View__ 
+
+  ![Landing Page](/readme_files/Wireframes/Detail_view_wireframe.png)
+
+### Background image
+
+  - __Landing Page Background Image__ 
+
+  An AI-generated image has been developed with the aim of evoking friendliness and technical expertise.
+
+  ![Background image](/static/media/landing-background.webp)
+
+  - __Colour Scheme__
+
+  Continuing with the simplicity premise, a small and friendly set of colours was carefully selected.
+
+  ![Colour Palette](/readme_files/Tick-it_palette.png)
+
+
 
   - The player is placed in the first of 11 possible locations to visit, randomly selected as the victim city, where the crime has taken place. The object that is stolen does have a connection to the place, although it may not always seem very plausible.
 
