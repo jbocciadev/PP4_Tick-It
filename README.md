@@ -6,7 +6,7 @@ tick·it is a simple, user-friendly online ticketing system. With tick·it, your
 
 ![Responsive Mockup](/readme_files/tickit-responsive.jpg)
 
-## The application
+# The application
 Based on real-life remedy ticketing systems, tick·it was developed with a user-first approach. With a clean, minimalistic visual design, users can easily find the information they are looking for. For staff, the interface is simple and clear, helping them save valuable time they can invest in fixing the issue, instead of navigating a complicated ticketing system UI.
 
 ## Features
@@ -39,10 +39,7 @@ Based on real-life remedy ticketing systems, tick·it was developed with a user-
   ![New ticket form](/readme_files/new_ticket_form.PNG)
 
 
-
-
-
-## Design
+# Design
 
 ### Wireframes
 
@@ -72,79 +69,140 @@ Based on real-life remedy ticketing systems, tick·it was developed with a user-
 
   Continuing with the simplicity premise, a small and friendly set of colours was carefully selected.
 
-  ![Colour Palette](/readme_files/Tick-it_palette.png)
+  ![Colour Palette](/readme_files/tick-it_palette.png)
 
 
+# Development
 
-  - The player is placed in the first of 11 possible locations to visit, randomly selected as the victim city, where the crime has taken place. The object that is stolen does have a connection to the place, although it may not always seem very plausible.
+## Version Control
 
-    ![Screenshot of a case](/assets/media/case.PNG)
-  
-    ![Table of cities](/assets/media/cities.PNG)
+  - The chosen IDE for the development of the application was [Gitpod](https://www.gitpod.io/). Due to resource limitations, [Codespaces](https://github.com/codespaces/) was also used to finalise the project.
 
-  - During the game, the city where the player is currently located serves as the "screen" for that moment in the game. They present the options available to the player, and the player can, if they choose so, learn a little information about the city in question.
+  - [GitHub](https://github.com) is the platform where the repository for ">_ tick·it" is hosted: [Jbocciadev tick-it](https://github.com/jbocciadev/PP4_Tick-It).
 
-    ![Screenshot of a city screen](/assets/media/screen.PNG)
+> Throughout development, the below commands were utilised to capture and store changes:
+```
+git add .
+git commit -m "Message in quotation marks."
+git push
+```
+>additionally
+```
+git pull
+git stash
+```
 
-  - Additionally, the game keeps track of the places that have already been visited by the player and returns the information as a visual cue when deciding where to travel next.
+## Agile Development
 
-    ![Screenshot of a travel screen](/assets/media/travel.PNG)
+  From the very begining, Agile development practices were adopted so as to maintain focus and keep track of the various requirements to be delivered.
 
+  - As an agile development technique, __Github Projects__ was used, taking special focus on the Kanban project board view:
+  ![Kanban Board](/readme_files/tick-it_kanban_board.png)
 
-- ### __The Suspects__
+  - Issues were logged as either User Stories or Features, including acceptance criteria and adding comments where required. At the end of the development process, 2 User Stories had to be reassessed and classified as "Won't Have" in the MOSCOW model, due to time constraints.
 
-  - Throughout the game, the player will collect clues that will help them figure out which of the usual suspect committed the crime.
+  - ## Under the Proverbial Hood
 
-    ![Table of suspects](/assets/media/suspects.PNG)
-  
-  - The player can choose to see the details in the individual suspect's file so they can match these with the clues collected and find the thief.
+    ### __Model__
+    ![Tick-It ERD](/readme_files/tick-it_ERD.PNG)
 
-    ![Suspect details](/assets/media/suspect_details.PNG)
-
-- ### __The clues__
-
-  - In every city the player visits, they will be presented with 3 locations they can visit and interrogate witnesses. Of the 3 clues, 2 will point towards where the player needs to travel next, and 1 will give them information about the thief.
-
-    ![Screenshot of locations](/assets/media/interrogation_locations.PNG)
-
-  - Should the player need to, they can revisit the clues they have collected along the game and these are presented in order and with the name of the city where they were collected.
-
-    ![Screenshot of clues](/assets/media/clues_capture.PNG)
-  
-  - __Watch out!__ If the player doesn't travel to the correct location, the clues they will receive from witnesses will be completely useless and they will have to travel back to the previous location, wasting precious time.
-
-    ![Screenshot of bogus clue](/assets/media/bogus.PNG)
-  
-- ### __The Travel Sequence__
-
-  - Once the player decides to travel, a basic animation of a dot travelling from the origin to the destination of the trip is presented, followed by a countdown displaying the time available for the player to catch the thief.
-
-    ![Screenshot of travel](/assets/media/travel_1.PNG) 
+    Along with Django's standard User model, another 3 custom models were developed:
+      1. Profile. With a one-to-one relationship with the User model, this extends the latter and provides additional information about the different application users.
+      2. Teams. This small table stores the name of the teams that will be composed be Users, via a many-to-one relationship.
+      3. Ticket. This model connects all the others and is the cornerstone of the application functionality.
     
-    ![Screenshot of countdown](/assets/media/travel_2.PNG)
+    #### __Forms__
 
-- ### __The Ending__
+    Django forms connect the Model and the View. Four forms comprise the forms.py file:
 
-  - There are 3 possible scenarios in which the game may come to an end:
-    1. The player runs out of time and the thief escapes:
+      - New ticket form:  
+        ![TicketForm](/readme_files/ticket_form.png)
 
-    ![Screenshot out of time](/assets/media/out_of_time.PNG)
-
-    2. The player arrests the incorrect suspect, allowing the thief to escape and thus, losing the game:
-
-    ![Screenshot of incorrect suspect](/assets/media/wrong_suspect.PNG)
-
-    3. The player arrests the thief, the stolen item is recovered and the player wins the game.
-
-    ![Screenshot of thief caught](/assets/media/thief_caught.PNG)
-
-  - As an additional feature, at the end of every game the player is presented with the option to start a new game, with a randomly selected thief, victim, etc. In the case of running a new game in this fashion, the game will skip the title sequence and remember the player's name:
+      - Ticket update forms:  
+        ![3 ticket update forms](/readme_files/ticket_update_forms.png)
     
-    ![Screenshot of replay](/assets/media/replay.PNG)
+    ### __View__
 
-## Under the Proverbial Hood
+    Django views govern the behaviour and logic behind every application. 
 
-  - ### __Game Flowchart__
+      - Landing Page View:  
+        ![Landing](/readme_files/landing_page_view.png)
+
+      - New Ticket View:  
+        ![New ticket](/readme_files/new_ticket_view.png)
+
+      - Delete Ticket View:  
+        ![Delete ticket](/readme_files/delete_ticket_view.png)
+      
+      - 3 Ticket modification views, to update status, team and member.
+
+    #### __URLs__
+
+    Django urls.py is comprised by a list of available URLs, along with the views connected with each of these:  
+    ![tick-it URLs](/readme_files/tick-it_urls.png)
+
+    ### __Template__
+
+    Django templates define the display of the information passed on by the views.  
+    ![tick-it templates](/readme_files/tick-it_templates.png)
+
+
+  ## Testing 
+
+  Along the development process, continuous manual testing was carried out so as to ensure that User Stories were satisfactorily delivered.
+
+  - Registration
+
+  | Test | Result |
+  |--|--|
+  |User can create account| OK |
+  |On account creation, user is allocated standard "customer" role| OK |
+  |User can log in and out of the account| OK |
+
+  - Navbar and footer
+
+  | Test | Result |
+  |--|--|
+  |If user is not logged in, the navbar displays "Log in" and "register" options| OK |
+  |If user is logged in, navbar displays "Log out" option| OK |
+  |Navbar is responsive to desktop/tablet/mobile screen variations| OK |
+  |All external hyperlinks direct to the appropriate url in a new browser tab| OK |
+
+  - List View
+
+  | Test | Result |
+  |--|--|
+  |On login, user is presented with a list of tickets| OK |
+  |Depending on the user's role, the list will be either of own tickets, or of other's| OK |
+  |When clicking on one of the list's rows, the full ticket is displayed| OK |
+  |Staff members can only see not-closed tickets| OK |
+  |Customers can not see team member's details| OK |
+
+  - Ticket Detail View
+
+  | Test | Result |
+  |--|--|
+  |Customers can not see team member's details| OK |
+  |New tickets can only be logged if all fields are completed| OK |
+  |Only staff members that belong to the assigned_team are displayed as options for edit| OK |
+  |Creation date and author fields are displayed| OK |
+  |"Delete Ticket" button is only available to ticket author| OK |
+
+  - Security
+
+  | Test | Result |
+  |--|--|
+  |Users cannot see ticket information if not logged in| OK |
+  |Customers can ONLY see tickets that they created| OK |
+  |Other than admin in admin view, only ticket authors can delete tickets| OK |
+  |Despite manually changing the URL, tickets that were logged by other users cannot be deleted| OK |
+
+    
+
+
+
+
+  ### __Game Flowchart__
 
     > See below flowchart with the outline of the game logic:
     ![Game Flowchart](/assets/media/pp3_diego_santacarmen_flowchart.jpg)
