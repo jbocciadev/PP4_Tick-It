@@ -150,6 +150,9 @@ Querying:
 Meme generator:
 https://imgflip.com/
 
+Bootstrap icons with Django:
+https://pypi.org/project/django-bootstrap-icons/
+
  ======================
 
 Known issues

@@ -56,7 +56,7 @@ body {
 .welcome-card {
     min-width: 80vw !important;
     padding: 1rem;
-    opacity: .8;
+    opacity: .9;
 }
 .card-ti {
     font-family: 'Rubik', sans-serif;
@@ -69,7 +69,6 @@ body {
 .welcome-card p {
     font-weight: 600;
     font-size: 1.05rem;
-    opacity: ;
 }
 
 .main-section {
@@ -96,7 +95,6 @@ table {
 
 .list_header{
     text-align: center;
-    /* background-color: rgb(40, 40, 40);  */
 }
 
 .nav-pills .nav-link{
@@ -152,7 +150,6 @@ footer i {
     display: flex;
     background-color: indigo;
     padding: 0;
-    /* border-radius: 10px; */
 }
 .footer_text {
     background-color: slategray;
@@ -162,8 +159,11 @@ footer i {
     margin: 0;
     padding: 0.5rem 0 0 0;
 }
+.footer_text a {
+    text-decoration: none;
+    color: inherit;
+}
 .footer_container {
-    /* border-top: 1px solid slategray; */
     padding: 0;
 }
 /* End of Footer styling */
@@ -174,14 +174,9 @@ footer i {
     --bs-navbar-active-color: indigo;
     --bs-tertiary-bg-rgb: 211,211,211;
 }
-/* .col-12{
-    padding:0;
-} */
-
 .table-hover td:hover {
     cursor: zoom-in;
 }
-
 .card-header {
     --bs-tertiary-bg-rgb: 211,211,211;
 }
