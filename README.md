@@ -147,6 +147,8 @@ Querying:
  - Field lookups: https://docs.djangoproject.com/en/4.2/ref/models/querysets/#field-lookups
  - One-to-one relationships: https://docs.djangoproject.com/en/4.2/topics/db/examples/one_to_one/
 
+Meme generator:
+https://imgflip.com/
 
  ======================
 
