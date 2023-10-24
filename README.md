@@ -1,114 +1,223 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# [>_ tick·it](https://pp4-tickit-9f996504db3b.herokuapp.com/)
 
-Welcome jbocciadev,
+Where in the world is... Diego Santacarmen? is a command-line educational game that pays tribute to the 1985 classic ["Where in the world is Carmen Sandiego?"](https://en.wikipedia.org/wiki/Where_in_the_World_Is_Carmen_Sandiego%3F_(1985_video_game)#:~:text=Where%20in%20the%20World%20is%20Carmen%20Sandiego%3F%20is%20an%20educational,Facts%2C%20published%20by%20Pharos%20Books.).
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+The player will have to chase the thief while collecting clues and arrest the right suspect before time runs out.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+[Try it here!](https://pp4-tickit-9f996504db3b.herokuapp.com/)
 
-## Gitpod Reminders
+![Responsive Mockup](/readme_files/tickit-responsive.jpg)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## The game
+The player is presented with the facts of the case and sent to the crime scene. There, they will have to interrogate the witnesses and follow the clues to either make an arrest, or travel to the next location where they will gather further clues. 
 
-`python3 -m http.server`
+## Features
 
-A blue button should appear to click: _Make Public_,
+- ### __The Locations__
 
-Another blue button should appear to click: _Open Browser_.
+  - The player is placed in the first of 11 possible locations to visit, randomly selected as the victim city, where the crime has taken place. The object that is stolen does have a connection to the place, although it may not always seem very plausible.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+    ![Screenshot of a case](/assets/media/case.PNG)
+  
+    ![Table of cities](/assets/media/cities.PNG)
 
-A blue button should appear to click: _Make Public_,
+  - During the game, the city where the player is currently located serves as the "screen" for that moment in the game. They present the options available to the player, and the player can, if they choose so, learn a little information about the city in question.
 
-Another blue button should appear to click: _Open Browser_.
+    ![Screenshot of a city screen](/assets/media/screen.PNG)
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+  - Additionally, the game keeps track of the places that have already been visited by the player and returns the information as a visual cue when deciding where to travel next.
 
-To log into the Heroku toolbelt CLI:
+    ![Screenshot of a travel screen](/assets/media/travel.PNG)
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+- ### __The Suspects__
 
-------
+  - Throughout the game, the player will collect clues that will help them figure out which of the usual suspect committed the crime.
 
-## Release History
+    ![Table of suspects](/assets/media/suspects.PNG)
+  
+  - The player can choose to see the details in the individual suspect's file so they can match these with the clues collected and find the thief.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+    ![Suspect details](/assets/media/suspect_details.PNG)
 
-**September 20 2023:** Update Python version to 3.9.17.
+- ### __The clues__
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+  - In every city the player visits, they will be presented with 3 locations they can visit and interrogate witnesses. Of the 3 clues, 2 will point towards where the player needs to travel next, and 1 will give them information about the thief.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+    ![Screenshot of locations](/assets/media/interrogation_locations.PNG)
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+  - Should the player need to, they can revisit the clues they have collected along the game and these are presented in order and with the name of the city where they were collected.
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+    ![Screenshot of clues](/assets/media/clues_capture.PNG)
+  
+  - __Watch out!__ If the player doesn't travel to the correct location, the clues they will receive from witnesses will be completely useless and they will have to travel back to the previous location, wasting precious time.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+    ![Screenshot of bogus clue](/assets/media/bogus.PNG)
+  
+- ### __The Travel Sequence__
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+  - Once the player decides to travel, a basic animation of a dot travelling from the origin to the destination of the trip is presented, followed by a countdown displaying the time available for the player to catch the thief.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+    ![Screenshot of travel](/assets/media/travel_1.PNG) 
+    
+    ![Screenshot of countdown](/assets/media/travel_2.PNG)
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+- ### __The Ending__
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+  - There are 3 possible scenarios in which the game may come to an end:
+    1. The player runs out of time and the thief escapes:
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+    ![Screenshot out of time](/assets/media/out_of_time.PNG)
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+    2. The player arrests the incorrect suspect, allowing the thief to escape and thus, losing the game:
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+    ![Screenshot of incorrect suspect](/assets/media/wrong_suspect.PNG)
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+    3. The player arrests the thief, the stolen item is recovered and the player wins the game.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+    ![Screenshot of thief caught](/assets/media/thief_caught.PNG)
 
-------
+  - As an additional feature, at the end of every game the player is presented with the option to start a new game, with a randomly selected thief, victim, etc. In the case of running a new game in this fashion, the game will skip the title sequence and remember the player's name:
+    
+    ![Screenshot of replay](/assets/media/replay.PNG)
 
-## FAQ about the uptime script
+## Under the Proverbial Hood
 
-**Why have you added this script?**
+  - ### __Game Flowchart__
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+    > See below flowchart with the outline of the game logic:
+    ![Game Flowchart](/assets/media/pp3_diego_santacarmen_flowchart.jpg)
 
-**How will this affect me?**
+ - ### __Helper Functions__
+  The below minions have been defined to add to the visual appeal of the game:
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+  - clear()
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+    ```
+    from os import system
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+    def clear():
+        """
+        Clears the terminal.
+        See https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console
+        """
+        system("clear")
+    ```
 
-**So….?**
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+  - t_print()
+    ```
+    def t_print(message):
+    """
+    Prints the passed string to the console, simulating a typewriter.
+    """
+    for char in message:
+        sleep(0.05)
+        print(char, end='', flush=True)
+    ```
 
-**Can I opt out?**
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+  - travel(origin, destination)
+    ```
+    def travel(origin, destination):
+    """
+    prints a sequence simulating the waiting time of a trip to the destination.
+    """
+    trip = [".         ", " .        ", "  .       ", "   .      ", "    .     ", "     .    ", "      .   ", "       .  ", "        . ", "         ."]
+    for i in range(10):
+        clear()
+        print(f"{origin}{trip[i]}{destination}")
+        sleep(0.3)
+        cursor.hide()
+    ```
 
+
+## Future Development Opportunities
+
+  - ### Here are some future implementations that were left for a further version:
+    
+    - __Rank promotion/demotion__: A reward-punishment logic can be implemented for every case resolution/failure so the player can ascend or fall in the ranks from traffic duty agent to Captain or Superintendent.
+
+    - __Leaderboard__: building on the previous point, a leaderboard, could be implemented with the different players and their ranks.
+
+    - __Coloured fonts/imagery__: as a visual improvement, colours can be implemented for the different sections/headings within the game, along with images/animations to be displayed.
+
+## Testing and known issues
+
+  - ### __Testing__
+
+    - __PEP8__ The code has been submitted to the Code Institute PEP8 lint and all major issues were fixed. The ones that remain are due to strings being too long, or a character in a docstring that the lint recognizes erroneously as an escape character (L229). With regard to the strings length, it has been decided that they are to remain as is for design purposes.
+
+      ![PEP8](/assets/media/pep8.PNG)
+
+    - Every input request has been tested with blank and invalid inputs and they handle the data as expected.
+
+    - The game has been tested both in the IDE's and heroku's terminals and they perform as expected.
+
+  - ### __Known Issues__
+
+    - An issue has been identified with the locations' descriptions' lengths. A function may be defined to parse through the individual strings and place line breaks in intervals so the text does not wrap breaking words.
+
+    - When run on Heroku, the game title does is not cleared and users can scroll up in the terminal to see the game title. Since this does not disrupts the gameplay and remains almost inperceptible as an issue, ot has been decided to leave as-is.
+
+  - ### __Bugs__
+  No bugs have been found to remain in the code as presented.
+
+## __Development and Version Control__
+
+  - The chosen IDE for the development of the application was [Gitpod](https://www.gitpod.io/).
+
+  - [GitHub](https://github.com) is the platform where the repository for "Where in the World is Diego Santacarmen" is hosted: [Jbocciadev Diego Santacarmen repository](https://github.com/jbocciadev/PP3_Diego_Santacarmen).
+
+> Throughout development, the below commands were utilised to capture and store changes:
 ```
-pkill uptime.sh
-rm .vscode/uptime.sh
+git add .
+git commit -m "Message in quotation marks."
+git push
+```
+>additionally
+```
+git pull
+git stash
 ```
 
-**Anything more?**
+## __Deployment__
+The application has been deployed to heroku. The steps taken were:
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+In [heroku](https://dashboard.heroku.com/apps): 
+    
+  1. Open the "new" menu and click on "Create new app".
+  2. Fill form fields with app name and region (Europe). Click on "Create app".
+  3. In the "Settings" section, click on "Add buildpack" and add Python and NodeJS, __in that order__.
+  4. In "Deployment method", select the GitHub option and provide the repository details. Click on "Connect".
+  5. Click on "Enable Automatic Deploys" and finally, click on "Deploy Branch".
 
----
 
-Happy coding!
+## Credits 
 
+### Inspiration
+- The MS DOS version of Carmen sandiego was one of my first experiences with videogames, and it holds a special place in my heart. As soon as I saw that the project was supposed to be a command-line based application, and that many other students had chosen to develop a game, Carmen Sandiego was the first thing that came to my head. I must admit that the development process has been more complicated than initially expected, the satisfaction of having a running version of this game is unmeasurable.
+
+- [This](https://carmensandiego.fandom.com/wiki/Where_in_the_World_is_Carmen_Sandiego%3F_(1985)) site helped in refreshing my badly-maintained memory.
+
+### Code
+
+- I cannot talk code without thanking Prof. David Malan and all the crew at HarvardX's [CS50X](https://cs50.harvard.edu/x/2023/).
+
+- [stack __overflow__](https://stackoverflow.com/) if you code, you know ;-). This [article](https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console) was a godsend. Also [this](https://stackoverflow.com/questions/983354/how-do-i-wait-for-a-pressed-key).
+
+- [geeks for geeks](https://www.geeksforgeeks.org/) this [entry](https://www.geeksforgeeks.org/switch-case-in-python-replacement/) broke my heart so I decided to go with if-elif-else in loops. :-(
+
+- [patorjk](https://patorjk.com/) is where I created the title for the game (Text to ASCII Art Generator).
+
+- [realpython](https://realpython.com/python-main-function/) and [freeCodeCamp](https://www.freecodecamp.org/news/if-name-main-python-example/).
+
+### Other
+- First and foremost, I owe gratitude to my family for dinners without me and days out I missed because I needed to sit and work on this project. Their support has always been unwavering.
+
+- A masive thank you to my mentor, Spencer and his [5pence](https://5pence.net/) site.
+
+- Thank you, thank you, thank you to the staff and colleagues at [Code Institute](https://codeinstitute.net). Course content, Tutoring sessions and (especially) Slack channels.
 
 
 --------------------
@@ -156,6 +265,9 @@ https://pypi.org/project/django-bootstrap-icons/
 
 Form to update team member assignment, based on assigned team // https://stackoverflow.com/questions/1697702/how-to-pass-initial-parameter-to-djangos-modelform-instance
 
+
+Database ERD:
+https://dbdiagram.io/d
  ======================
 
 Known issues
