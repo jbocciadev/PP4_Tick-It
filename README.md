@@ -222,9 +222,28 @@ Google Lighthouse result is satisfactory.
 
 ## Tech Stack
 
-
+  The following technologies were used to develop this application:
+  - Django v3.2.21
+  - Cloudinary
+  - Gunicorn
+  - Bootstrap 5
+  - Django Bootstrap Icons
+  - Django Allauth
+  - Psycopg2
+  - Git
 
 ## Deployment  
+
+The application has been deployed to heroku. The steps taken were:
+
+In [heroku](https://dashboard.heroku.com/apps): 
+    
+  1. Open the "new" menu and click on "Create new app".
+  2. Fill form fields with app name and region (Europe). Click on "Create app".
+  3. In the "Settings" section, click on "Add buildpack" and add Python.
+  4. In the "Settings" section, add the following config variables: ALLOWED_HOSTS, CLOUDINARY_URL, DATABASE_URL, PORT, SECRET_KEY.
+  5. In "Deployment method", select the GitHub option and provide the repository details. Click on "Connect".
+  6. Click on "Enable Automatic Deploys" and finally, click on "Deploy Branch".
 
 
   
@@ -237,44 +256,27 @@ Google Lighthouse result is satisfactory.
 
 ## Credits  
 
-<!-- 
-## Credits 
-
 ### Inspiration
-- The MS DOS version of Carmen sandiego was one of my first experiences with videogames, and it holds a special place in my heart. As soon as I saw that the project was supposed to be a command-line based application, and that many other students had chosen to develop a game, Carmen Sandiego was the first thing that came to my head. I must admit that the development process has been more complicated than initially expected, the satisfaction of having a running version of this game is unmeasurable.
+During my time in this course, I have come to the conclusion that I take pleasure in developing projects that add value to the user, tools that make life a little easier.
 
-- [This](https://carmensandiego.fandom.com/wiki/Where_in_the_World_is_Carmen_Sandiego%3F_(1985)) site helped in refreshing my badly-maintained memory.
+At my current place of employment, we use a rather complicated and "busy" ticketing system. Therefore, I decided that I was to synthetise its core functionality and develop a user-friendly ticketing system that I would be happy to work with if I was a staff member of a company that implemented this application.
 
-### Code
+### Thanks
 
-- I cannot talk code without thanking Prof. David Malan and all the crew at HarvardX's [CS50X](https://cs50.harvard.edu/x/2023/).
-
-- [stack __overflow__](https://stackoverflow.com/) if you code, you know ;-). This [article](https://stackoverflow.com/questions/517970/how-to-clear-the-interpreter-console) was a godsend. Also [this](https://stackoverflow.com/questions/983354/how-do-i-wait-for-a-pressed-key).
-
-- [geeks for geeks](https://www.geeksforgeeks.org/) this [entry](https://www.geeksforgeeks.org/switch-case-in-python-replacement/) broke my heart so I decided to go with if-elif-else in loops. :-(
-
-- [patorjk](https://patorjk.com/) is where I created the title for the game (Text to ASCII Art Generator).
-
-- [realpython](https://realpython.com/python-main-function/) and [freeCodeCamp](https://www.freecodecamp.org/news/if-name-main-python-example/).
-
-### Other
 - First and foremost, I owe gratitude to my family for dinners without me and days out I missed because I needed to sit and work on this project. Their support has always been unwavering.
 
 - A masive thank you to my mentor, Spencer and his [5pence](https://5pence.net/) site.
 
-- Thank you, thank you, thank you to the staff and colleagues at [Code Institute](https://codeinstitute.net). Course content, Tutoring sessions and (especially) Slack channels.
- -->
+- Thank you, thank you, thank you to the staff, cohort colleagues and fellow students at [Code Institute](https://codeinstitute.net). Course content, Tutoring sessions and (especially) Slack channels. Of special mention, my cohort facilitator, Alan Bushell and my cohort lead, Lewis Dillon.
 
---------------------
+### Reference:
+
 Extending user model:
 https://docs.djangoproject.com/en/dev/topics/auth/customizing/#extending-the-existing-user-model
 https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#proxy
 
 Django models FK on_delete:
 https://sentry.io/answers/django-on-delete/
-
-Hover effects:
-Ian Lunn https://ianlunn.github.io/Hover/
 
 User authentication:
 https://docs.djangoproject.com/en/4.2/topics/auth/default/ Login required mixin
@@ -310,20 +312,5 @@ https://pypi.org/project/django-bootstrap-icons/
 
 Form to update team member assignment, based on assigned team // https://stackoverflow.com/questions/1697702/how-to-pass-initial-parameter-to-djangos-modelform-instance
 
-
 Database ERD:
 https://dbdiagram.io/d
-
-code validators:
-HTML: https://validator.w3.org/
-CSS: https://jigsaw.w3.org/css-validator/
-JS: https://jshint.com/
-Python: VScode built-in "Problems" panel display.
- ======================
-
-Known issues
-
-Ticket list display on smaller screens breaks the boundaries and becomes scrollable
-
-Messages: there are instances where the JS for dismissing the messages generates an error. To this moment, I have 
-    followed the steps laid out during the blog walkthrough and did troubleshooting and checked online, but due to ...
