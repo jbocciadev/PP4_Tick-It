@@ -94,12 +94,13 @@ git stash
 
 ## Agile Development
 
-  From the very begining, Agile development practices were adopted so as to maintain focus and keep track of the various requirements to be delivered.
+From the very begining, Agile development practices were adopted so as to maintain focus and keep track of the various requirements to be delivered.
 
-  - As an agile development technique, __Github Projects__ was used, taking special focus on the Kanban project board view:
+- As an agile development technique, __Github Projects__ was used, taking special focus on the Kanban project board view:
   ![Kanban Board](/readme_files/tick-it_kanban_board.png)
+  You can access the project board [here](https://github.com/users/jbocciadev/projects/7).
 
-  - Issues were logged as either User Stories or Features, including acceptance criteria and adding comments where required. At the end of the development process, 2 User Stories had to be reassessed and classified as "Won't Have" in the MOSCOW model, due to time constraints.
+- Issues were logged as either User Stories or Features, including acceptance criteria and adding comments where required. At the end of the development process, 2 User Stories had to be reassessed and classified as "Won't Have" in the MOSCOW model, due to time constraints.
 
 ## Under the Proverbial Hood
 
